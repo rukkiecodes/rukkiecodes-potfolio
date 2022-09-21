@@ -5,7 +5,7 @@
       fixed
       class="app-bar rounded-lg ma-2 ma-sm-5"
     >
-      <v-toolbar-title class="deep-purple--text text--accent-4">.rukkiecodeds()</v-toolbar-title>
+      <nuxt-link to="/" class="deep-purple--text text--accent-4 text-decoration-none text-sm-h6">.rukkiecodeds()</nuxt-link>
       <v-spacer />
       <Contact />
     </v-app-bar>

@@ -139,24 +139,6 @@ export default {
     drawer: true,
     projects: [
       {
-        title: 'BlueZone Finance',
-        to: '/blueZone',
-        icon: 'mdi-language-javascript',
-        lang: 'Javascript',
-        color: 'orange',
-        avatar: require('../assets/img/bz.png'),
-        caption: 'Bluezone Finance is a premium cryptocurrency Trading company, with an open financial system predominantly for the purpose of regenerating invested cryptocurrencies through daily professional trades and Crypto Mining. Bluezone Finance has become a multi-functional cryptocurrency platform, trusted by over thousands of users.'
-      },
-      {
-        title: 'BlueZone Finance Admin',
-        to: '/blueZoneAdmin',
-        icon: 'mdi-language-javascript',
-        lang: 'Javascript',
-        color: 'orange',
-        avatar: require('../assets/img/bza.png'),
-        caption: 'Bluezone Finance is a premium cryptocurrency Trading company, with an open financial system predominantly for the purpose of regenerating invested cryptocurrencies through daily professional trades and Crypto Mining. Bluezone Finance has become a multi-functional cryptocurrency platform, trusted by over thousands of users.'
-      },
-      {
         title: 'Oymo',
         to: '/oymo',
         icon: 'mdi-vuejs',
@@ -173,6 +155,24 @@ export default {
         color: 'teal',
         avatar: require('../assets/img/oymowl.png'),
         caption: 'Find friends, and dates around you with just a swipe.'
+      },
+      {
+        title: 'BlueZone Finance',
+        to: '/blueZone',
+        icon: 'mdi-language-javascript',
+        lang: 'Javascript',
+        color: 'orange',
+        avatar: require('../assets/img/bz.png'),
+        caption: 'Bluezone Finance is a premium cryptocurrency Trading company, with an open financial system predominantly for the purpose of regenerating invested cryptocurrencies through daily professional trades and Crypto Mining. Bluezone Finance has become a multi-functional cryptocurrency platform, trusted by over thousands of users.'
+      },
+      {
+        title: 'BlueZone Finance Admin',
+        to: '/blueZoneAdmin',
+        icon: 'mdi-language-javascript',
+        lang: 'Javascript',
+        color: 'orange',
+        avatar: require('../assets/img/bza.png'),
+        caption: 'Bluezone Finance is a premium cryptocurrency Trading company, with an open financial system predominantly for the purpose of regenerating invested cryptocurrencies through daily professional trades and Crypto Mining. Bluezone Finance has become a multi-functional cryptocurrency platform, trusted by over thousands of users.'
       },
       {
         title: 'Maystro',
