@@ -60,7 +60,7 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row id="work">
       <v-col
         cols="12"
         sm="6"
@@ -72,12 +72,8 @@
         >
           <v-card-title class="logo mx-0 px-0 text-h4">about(<span class="deep-purple--text text--accent-4">me</span>)<span class="ml-3">{</span></v-card-title>
           <v-row>
-            <v-col
-              cols="1"
-            ></v-col>
-            <v-col
-              cols="11"
-            >
+            <v-col cols="1"></v-col>
+            <v-col cols="11">
               <span class="logo blue-grey--text text--darken-1">
                 <span class="deep-purple--text text--accent-4">return </span>`
                 <span>Personally connected with the web development industry and information technology for many years.</span>
@@ -103,14 +99,36 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col cols="12" sm="4">
+    <v-row class="mt-15">
+      <v-col
+        cols="12"
+        sm="4"
+      >
         <SkillsImage />
       </v-col>
-      <v-col cols="12" sm="8">
+      <v-col
+        cols="12"
+        sm="8"
+      >
         <Skills />
       </v-col>
     </v-row>
+
+    <v-container class="mt-15">
+      <v-row>
+        <v-col cols="12">
+          <v-card width="500" color="transparent" flat>
+            <p class="logo">Thanks for checking my website!</p>
+            <p class="logo blue-grey--text text--darken-1">// It's a work in progress so check back often!</p>
+            <p
+              class="logo font-weight-bold"
+              style="font-size: 3rem;"
+            >Check out my <span class="deep-purple--text text--accent-4" @click="gotoWork" style="cursor: pointer;">Selcted works</span> for more details.</p>
+            <p class="logo">I am available for new projects and a coffee <span class="deep-purple--text text--accent-4">;)</span></p>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
@@ -133,6 +151,9 @@ export default {
     },
     gotoLinkedin () {
       window.open("https://www.linkedin.com/in/terry-amagboro-004830197");
+    },
+    gotoWork () {
+      document.getElementById("work").scrollIntoView(false)
     }
   },
 

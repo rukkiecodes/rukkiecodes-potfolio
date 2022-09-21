@@ -15,6 +15,8 @@
     <v-footer
       absolute
       app
+      color="transparent"
+      class="d-flex justify-center"
     >
       <span>rukkiecodes &copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
