@@ -83,12 +83,12 @@
           <v-toolbar
             dense
             flat
-            floating
             color="#22272E"
           >
             <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-lg-and-up" />
-            <v-app-bar-title class="ml-0 pl-0 logo">Recent projects</v-app-bar-title>
+            <v-app-bar-title class="ml-0 pl-0">Recent projects</v-app-bar-title>
             <v-spacer />
+            <v-btn small depressed color="deep-purple accent-4" class="rounded-lg" to="/work">work()</v-btn>
           </v-toolbar>
 
           <v-sheet
@@ -106,7 +106,7 @@
                 <v-img :src="project.avatar"></v-img>
               </v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title class="logo">
+                <v-list-item-title>
                   <nuxt-link
                     class="text-decoration-none"
                     :to="project.to"
@@ -140,7 +140,7 @@ export default {
     projects: [
       {
         title: 'BlueZone Finance',
-        to: '/',
+        to: '/blueZone',
         icon: 'mdi-language-javascript',
         lang: 'Javascript',
         color: 'orange',
@@ -149,7 +149,7 @@ export default {
       },
       {
         title: 'BlueZone Finance Admin',
-        to: '/',
+        to: '/blueZoneAdmin',
         icon: 'mdi-language-javascript',
         lang: 'Javascript',
         color: 'orange',
@@ -158,7 +158,7 @@ export default {
       },
       {
         title: 'Oymo',
-        to: '/',
+        to: '/oymo',
         icon: 'mdi-vuejs',
         lang: 'View',
         color: 'teal',
@@ -167,7 +167,7 @@ export default {
       },
       {
         title: 'Oymo waitlist',
-        to: '/',
+        to: '/oymoWaaitList',
         icon: 'mdi-vuejs',
         lang: 'View',
         color: 'teal',
@@ -176,7 +176,7 @@ export default {
       },
       {
         title: 'Maystro',
-        to: '/',
+        to: '/maystro',
         icon: 'mdi-vuejs',
         lang: 'View',
         color: 'teal',
@@ -185,7 +185,7 @@ export default {
       },
       {
         title: 'Trustpaddi',
-        to: '/',
+        to: '/trustpaddi',
         icon: 'mdi-vuejs',
         lang: 'View',
         color: 'teal',
@@ -194,11 +194,11 @@ export default {
       },
       {
         title: 'Trustpaddi waitlist',
-        to: '/',
+        to: '/trustpaddiWaitlist',
         icon: 'mdi-vuejs',
         lang: 'View',
         color: 'teal',
-        avatar: require('../assets/img/tp.png'),
+        avatar: require('../assets/img/tpwl.png'),
         caption: 'TrustPaddi is a payment solution built with escrow protection, which ensures safer and scam free transactions between online vendors, service providers and individuals online.'
       },
     ],

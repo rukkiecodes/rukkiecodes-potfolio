@@ -5,13 +5,16 @@
       fixed
       class="app-bar rounded-lg ma-2 ma-sm-5"
     >
-      <v-toolbar-title class="logo deep-purple--text text--accent-4">.rukkiecodeds()</v-toolbar-title>
+      <v-toolbar-title class="deep-purple--text text--accent-4">.rukkiecodeds()</v-toolbar-title>
       <v-spacer />
       <Contact />
     </v-app-bar>
     <v-main>
-      <transition name="fade" mode="out-in">
-      <Nuxt />
+      <transition
+        name="fade"
+        mode="out-in"
+      >
+        <Nuxt />
       </transition>
     </v-main>
     <v-footer
@@ -28,37 +31,37 @@
 <script>
 import Contact from '~/components/Contact.vue';
 export default {
-    name: "DefaultLayout",
-    data() {
-        return {
-            clipped: false,
-            drawer: false,
-            fixed: false,
-            items: [
-                {
-                    icon: "mdi-apps",
-                    title: "Welcome",
-                    to: "/"
-                },
-                {
-                    icon: "mdi-chart-bubble",
-                    title: "Inspire",
-                    to: "/inspire"
-                }
-            ],
-            miniVariant: false,
-            right: true,
-            rightDrawer: false,
-            title: "Vuetify.js"
-        };
-    },
-    components: { Contact }
+  name: "DefaultLayout",
+  data () {
+    return {
+      clipped: false,
+      drawer: false,
+      fixed: false,
+      items: [
+        {
+          icon: "mdi-apps",
+          title: "Welcome",
+          to: "/"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Inspire",
+          to: "/inspire"
+        }
+      ],
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: "Vuetify.js"
+    };
+  },
+  components: { Contact }
 }
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
-.logo {
+* {
   font-family: "Fira Code", monospace !important;
 }
 

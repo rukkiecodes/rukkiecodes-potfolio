@@ -23,7 +23,7 @@
             <v-avatar size="150">
               <v-img src="https://res.cloudinary.com/rukkiecodes/image/upload/v1663761613/IMG_21142_pljiqr.jpg" />
             </v-avatar>
-            <v-card-text class="logo text-h4 font-weight-bold">Terry Amagboro</v-card-text>
+            <v-card-text class="text-h4 font-weight-bold">Terry Amagboro</v-card-text>
             <span>Creative frontend developer, designer and illustrator.</span>
             <v-card-actions class="d-flex justify-space-between">
               <v-btn
@@ -70,11 +70,11 @@
           color="transparent mx-0 ml-sm-5"
           flat
         >
-          <v-card-title class="logo mx-0 px-0 text-h4">about(<span class="deep-purple--text text--accent-4">me</span>)<span class="ml-3">{</span></v-card-title>
+          <v-card-title class="mx-0 px-0 text-h4">about(<span class="deep-purple--text text--accent-4">me</span>)<span class="ml-3">{</span></v-card-title>
           <v-row>
             <v-col cols="1"></v-col>
             <v-col cols="11">
-              <span class="logo blue-grey--text text--darken-1">
+              <span class="blue-grey--text text--darken-1">
                 <span class="deep-purple--text text--accent-4">return </span>`
                 <span>Personally connected with the web development industry and information technology for many years.</span>
                 <br>
@@ -86,7 +86,7 @@
               </span>
             </v-col>
           </v-row>
-          <v-card-title class="logo mx-0 px-0 text-h4">}</v-card-title>
+          <v-card-title class="mx-0 px-0 text-h4">}</v-card-title>
         </v-card>
       </v-col>
 
@@ -118,13 +118,12 @@
       <v-row>
         <v-col cols="12">
           <v-card width="500" color="transparent" flat>
-            <p class="logo">Thanks for checking my website!</p>
-            <p class="logo blue-grey--text text--darken-1">// It's a work in progress so check back often!</p>
+            <p>Thanks for checking my website!</p>
+            <p class="blue-grey--text text--darken-1">// It's a work in progress so check back often!</p>
             <p
-              class="logo font-weight-bold"
-              style="font-size: 3rem;"
+              class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2"
             >Check out my <router-link to="/work" class="deep-purple--text text--accent-4" style="cursor: pointer;">Selcted works</router-link> for more details.</p>
-            <p class="logo">I am available for new projects and a coffee <span class="deep-purple--text text--accent-4">;)</span></p>
+            <p>I am available for new projects and a coffee <span class="deep-purple--text text--accent-4">;)</span></p>
           </v-card>
         </v-col>
       </v-row>
