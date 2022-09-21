@@ -78,7 +78,7 @@
             <v-col
               cols="11"
             >
-              <span class="logo blue-grey--text text--lighten-3">
+              <span class="logo blue-grey--text text--darken-1">
                 <span class="deep-purple--text text--accent-4">return </span>`
                 <span>Personally connected with the web development industry and information technology for many years.</span>
                 <br>
@@ -102,11 +102,22 @@
         <Repo />
       </v-col>
     </v-row>
+
+    <v-row>
+      <v-col cols="12" sm="4">
+        <SkillsImage />
+      </v-col>
+      <v-col cols="12" sm="8">
+        <Skills />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
 import Repo from "../components/Repo.vue";
+import SkillsImage from "../components/SkillsImage.vue";
+import Skills from "~/components/Skills.vue";
 export default {
   name: "IndexPage",
   data: () => ({}),
@@ -125,6 +136,6 @@ export default {
     }
   },
 
-  components: { Repo }
+  components: { Repo, SkillsImage, Skills }
 }
 </script>

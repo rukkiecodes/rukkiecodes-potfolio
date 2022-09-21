@@ -7,7 +7,7 @@
     >
       <v-toolbar-title class="logo deep-purple--text text--accent-4">.rukkiecodeds()</v-toolbar-title>
       <v-spacer />
-
+      <Contact />
     </v-app-bar>
     <v-main>
       <Nuxt />
@@ -22,31 +22,33 @@
 </template>
 
 <script>
+import Contact from '~/components/Contact.vue';
 export default {
-  name: 'DefaultLayout',
-  data () {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
-    }
-  }
+    name: "DefaultLayout",
+    data() {
+        return {
+            clipped: false,
+            drawer: false,
+            fixed: false,
+            items: [
+                {
+                    icon: "mdi-apps",
+                    title: "Welcome",
+                    to: "/"
+                },
+                {
+                    icon: "mdi-chart-bubble",
+                    title: "Inspire",
+                    to: "/inspire"
+                }
+            ],
+            miniVariant: false,
+            right: true,
+            rightDrawer: false,
+            title: "Vuetify.js"
+        };
+    },
+    components: { Contact }
 }
 </script>
 

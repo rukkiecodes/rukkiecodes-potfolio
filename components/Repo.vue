@@ -2,7 +2,7 @@
   <v-card
     height="500"
     color="#22272E"
-    class="rounded-xl rounded-r-sm-0 overflow-hidden"
+    class="rounded-xl overflow-hidden"
   >
     <v-row no-gutters>
       <v-col
