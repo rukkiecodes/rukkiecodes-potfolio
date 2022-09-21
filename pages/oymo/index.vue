@@ -1,7 +1,7 @@
 <template>
   <v-container style="margin-top: 40vh;">
     <v-card
-      width="700"
+      width="750"
       flat
       color="transparent"
       class="mb-15"
@@ -279,13 +279,13 @@
           </video>
         </v-card>
       </v-col>
-      <v-col cols="12" class="mt-15">
+      <v-col cols="12" class="mt-16">
         <p class="blue-grey--text text--darken-1">// More...</p>
       </v-col>
 
-      <v-toolbar color="transparent" dense flat>
+      <v-toolbar color="transparent" class="mb-16" dense flat>
         <v-spacer />
-        <v-btn rounded text class="text-capitalize" to="/oymoWaaitList">Oymo waitlist <v-icon class="ml-3">mdi-arrow-right</v-icon></v-btn>
+        <nuxt-link to="/oymoWaaitList" class="deep-purple--text text--accent-4 text-decoration-none">Oymo waitlist</nuxt-link>
       </v-toolbar>
     </v-row>
   </v-container>
