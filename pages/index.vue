@@ -123,7 +123,7 @@
             <p
               class="logo font-weight-bold"
               style="font-size: 3rem;"
-            >Check out my <span class="deep-purple--text text--accent-4" @click="gotoWork" style="cursor: pointer;">Selcted works</span> for more details.</p>
+            >Check out my <router-link to="/work" class="deep-purple--text text--accent-4" style="cursor: pointer;">Selcted works</router-link> for more details.</p>
             <p class="logo">I am available for new projects and a coffee <span class="deep-purple--text text--accent-4">;)</span></p>
           </v-card>
         </v-col>
@@ -151,9 +151,6 @@ export default {
     },
     gotoLinkedin () {
       window.open("https://www.linkedin.com/in/terry-amagboro-004830197");
-    },
-    gotoWork () {
-      document.getElementById("work").scrollIntoView(false)
     }
   },
 

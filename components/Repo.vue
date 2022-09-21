@@ -88,6 +88,7 @@
           >
             <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-lg-and-up" />
             <v-app-bar-title class="ml-0 pl-0 logo">Recent projects</v-app-bar-title>
+            <v-spacer />
           </v-toolbar>
 
           <v-sheet

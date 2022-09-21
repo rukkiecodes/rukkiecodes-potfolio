@@ -10,7 +10,9 @@
       <Contact />
     </v-app-bar>
     <v-main>
+      <transition name="fade" mode="out-in">
       <Nuxt />
+      </transition>
     </v-main>
     <v-footer
       absolute
@@ -64,5 +66,16 @@ export default {
   background: #1212128a !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.8s;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
