@@ -27,7 +27,7 @@
                   size="100"
                   class="mx-auto"
                 >
-                  <v-img src="https://lh3.googleusercontent.com/IbomUFjlPd5SpgWH2HHEVjzzHufHyb8AEXhbLBL_NhGh-Xm6wjMyPTMAMH85D1wQtcTspnm67iTn9U6sRYBkEmG3bD8dcW_kYTx6eVrY5VQ0x_nBR4QK36zmDNXzkk6aAadq8Bb4ZzvFMgaPAsekkQAOyAhi9Poav5RmV1zMKpFq6hfFx8ZYJrPI55uPigeRuMvjORGbnu7DiqHbGzI3w441i1keZDPQlRBHjNM1_cBpF2ITSCw5JTJ68aCZ5aDXs3ogLHcHjmqK2JZ7HiPCJAyw29o98qlNl3EIL1Ag9YIj6_sygpgg6kkkvFYNOV1pMvb7uiRj6hkMs7h_JfdTYkRPYKhkRhHjtzQ-EBtKIMbzkbmZC4jYyXX28Kp9hlJkLRLfQsVFz-3jlM0y3iEAzPYoCNE796ab6aHpjFneKPw9u9DduT8Cq9BqYgxHw4PhqHvf4VD0e4OvP9OY_UyAwGw8sAY6vsG10cjsSzpH55g2HAm8Gfes-BNOtDamJ7mwflXtx2jWZxWVsUg_6an005bEOQXlSmGdl5vdfvWkgnEXp8ktH2VuyPiMCwdBLDO9il4t5UMawD09vTiCwlDN8pqkKkYCoQZ8fFeyr28F0CHDH7tcr0rcDaXRtmhpUoH9oMeVyfYRRI9LJG3YPXfOfUGuFzW6ZDohcdrLl2GMnL9DFaDW6xwYzyHwjUNunzge98vH_bPySeVtOwT-V_LQGsjb0GqQ-gOKRuf8nzkz7VHdXmrJfOdY2u8gc2OzBP_vkYcaCTHhHKQSlXYSvyGnztrXoebklDfKXLxf1wyW9e-CQkEMDoRbB9THeftR6rEL24abSUolw8stibGlYtFkKVbLYVLUC9hDNeumL0l9GfsTj-jhltRubJC_i5VN67HGL-6xSqtsOhUHAxdKNibL5thVMea620D-3pUXAYhbIEVuxtdNfdQBLYkZZ14DrqMS8INh9D73AHg2SUyogPDYF7WgzWucQLkcBS_EUeHSPGumrLvG2Fp107NP_FruPlGiKjjojbcEciF83CeQwg=w522-h696-no?authuser=0" />
+                  <v-img src="https://res.cloudinary.com/rukkiecodes/image/upload/v1663761613/IMG_21142_pljiqr.jpg" />
                 </v-avatar>
                 <v-card-text class="text-body-1 font-weight-bold">Terry Amagboro</v-card-text>
                 <v-card-text class="text-body-2 font-weight-light mt-n8">rukkiecodes</v-card-text>
