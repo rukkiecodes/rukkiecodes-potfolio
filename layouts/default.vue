@@ -1,18 +1,10 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      absolute
-      temporary
-    >
-
-    </v-navigation-drawer>
     <v-app-bar
       flat
       fixed
       class="app-bar rounded-lg ma-2 ma-sm-5"
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-sm-and-up" />
       <nuxt-link
         to="/"
         class="deep-purple--text text--accent-4 text-decoration-none text-sm-h6"
@@ -29,6 +21,28 @@
         active-class="blue-grey--text text--darken-1"
       >.work()</router-link>
       <Contact />
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            small
+            v-bind="attrs"
+            v-on="on"
+            class="ml-5 hidden-sm-and-up"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item
+            v-for="(route, i) in routes"
+            :key="i"
+            :to="route.to"
+          >
+            <v-list-item-title>{{ route.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main>
       <transition
@@ -58,17 +72,9 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/"
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
-        }
+      routes: [
+        { title: '.rukkie()', to: '/' },
+        { title: '.work()', to: '/work' },
       ],
       miniVariant: false,
       right: true,

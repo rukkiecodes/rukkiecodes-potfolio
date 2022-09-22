@@ -3,6 +3,7 @@
     <v-btn
       color="deep-purple accent-4"
       depressed
+      :small="small"
       class="rounded-lg text-capitalize"
       @click.stop="dialog = true"
     >
@@ -115,9 +116,15 @@ export default {
         this.loading = false
       })
     }
-  }
+  },
+
+  computed: {
+    small () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return true
+        case 'sm': return false
+      }
+    },
+  },
 }
 </script>
-
-<style>
-</style>

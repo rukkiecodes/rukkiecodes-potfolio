@@ -72,6 +72,12 @@
         >
           <v-card-title class="mx-0 px-0 text-h4">about(<span class="deep-purple--text text--accent-4">me</span>)<span class="ml-3">{</span></v-card-title>
           <v-row>
+            <v-col cols="12">
+              <v-btn @click="gotoResume" rounded depressed class="text-capitalize" color="deep-purple accent-4">
+                My Resume
+                <v-icon small class="ml-2">mdi-link-variant</v-icon>
+              </v-btn>
+            </v-col>
             <v-col cols="1"></v-col>
             <v-col cols="11">
               <span class="blue-grey--text text--darken-1">
@@ -150,6 +156,9 @@ export default {
     },
     gotoLinkedin () {
       window.open("https://www.linkedin.com/in/terry-amagboro-004830197");
+    },
+    gotoResume () {
+      window.open("https://docs.google.com/document/d/1VOFordnMhqUqPV4W18j3R9xEW6OAvtAF/edit?usp=sharing&ouid=118220414778609688788&rtpof=true&sd=true");
     }
   },
 
