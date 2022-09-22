@@ -82,7 +82,37 @@ export default {
       title: "Vuetify.js"
     };
   },
-  components: { Contact }
+
+  components: { Contact },
+
+  mounted () {
+    this.$nextTick(() => {
+      this.drawerVisibility()
+      removeBorder()
+    })
+  },
+
+  methods: {
+    removeBorder () {
+      const border = document.querySelector(".v-navigation-drawer__border")
+      if (border) border.style.display = "none"
+    },
+
+    drawerVisibility () {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return (this.drawer = false)
+        case "sm":
+          return (this.drawer = false)
+        case "md":
+          return (this.drawer = false)
+        case "lg":
+          return (this.drawer = true)
+        case "xl":
+          return (this.drawer = true)
+      }
+    },
+  },
 }
 </script>
 

@@ -142,7 +142,7 @@ export default {
         title: 'Oymo',
         to: '/oymo',
         icon: 'mdi-vuejs',
-        lang: 'View',
+        lang: 'Vue',
         color: 'teal',
         avatar: require('../assets/img/oymo.png'),
         caption: 'Oymo is a communication platform, which offers a comfortable and safe environment for men and women to find the love of their life.'
@@ -151,7 +151,7 @@ export default {
         title: 'Oymo waitlist',
         to: '/oymoWaaitList',
         icon: 'mdi-vuejs',
-        lang: 'View',
+        lang: 'Vue',
         color: 'teal',
         avatar: require('../assets/img/oymowl.png'),
         caption: 'Find friends, and dates around you with just a swipe.'
@@ -178,7 +178,7 @@ export default {
         title: 'Maystro',
         to: '/maystro',
         icon: 'mdi-vuejs',
-        lang: 'View',
+        lang: 'Vue',
         color: 'teal',
         avatar: require('../assets/img/maystro.png'),
         caption: 'ESTABLISHED OR EMERGING, WE PROVIDE QUALITY OPPORTUNITIES WITHIN FILM, TELEVISION, THEATRE & COMMERCIALS.'
@@ -187,7 +187,7 @@ export default {
         title: 'Trustpaddi',
         to: '/trustpaddi',
         icon: 'mdi-vuejs',
-        lang: 'View',
+        lang: 'Vue',
         color: 'teal',
         avatar: require('../assets/img/tp.png'),
         caption: 'TrustPaddi is a payment solution built with escrow protection, which ensures safer and scam free transactions between online vendors, service providers and individuals online.'
@@ -196,7 +196,7 @@ export default {
         title: 'Trustpaddi waitlist',
         to: '/trustpaddiWaitlist',
         icon: 'mdi-vuejs',
-        lang: 'View',
+        lang: 'Vue',
         color: 'teal',
         avatar: require('../assets/img/tpwl.png'),
         caption: 'TrustPaddi is a payment solution built with escrow protection, which ensures safer and scam free transactions between online vendors, service providers and individuals online.'
