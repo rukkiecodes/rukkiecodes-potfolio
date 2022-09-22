@@ -136,7 +136,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: true,
+    drawer: !true,
     projects: [
       {
         title: 'Oymo',
