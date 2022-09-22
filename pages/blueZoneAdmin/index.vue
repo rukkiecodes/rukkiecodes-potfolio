@@ -4,7 +4,7 @@
       width="750"
       flat
       color="transparent"
-      class="mb-15"
+      class="mb-16"
     >
       <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">work(<span class="deep-purple--text text--accent-4 font-weight-light">'BlueZone Admin'</span>)</p>
       <p class="deep-purple--text text--accent-4">// Head of Project, backend</p>
@@ -14,7 +14,7 @@
       </p>
     </v-card>
 
-    <v-row class="mt-15">
+    <v-row class="mt-16">
       <v-col
         cols="12"
         sm="5"
@@ -45,7 +45,7 @@
     <v-row
       justify="space-between"
       align="start"
-      class="mt-15  "
+      class="mt-16"
     >
       <v-col cols="12">
         <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4">What Bluezone Solves</p>

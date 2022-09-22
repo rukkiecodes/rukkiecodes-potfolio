@@ -1,12 +1,33 @@
 <template>
   <v-app dark>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+
+    </v-navigation-drawer>
     <v-app-bar
       flat
       fixed
       class="app-bar rounded-lg ma-2 ma-sm-5"
     >
-      <nuxt-link to="/" class="deep-purple--text text--accent-4 text-decoration-none text-sm-h6">.rukkiecodeds()</nuxt-link>
+      <v-app-bar-nav-icon @click="drawer = !drawer" class="hidden-sm-and-up" />
+      <nuxt-link
+        to="/"
+        class="deep-purple--text text--accent-4 text-decoration-none text-sm-h6"
+      >.rukkiecodeds()</nuxt-link>
       <v-spacer />
+      <router-link
+        to="/"
+        class="text-decoration-none mr-5 deep-purple--text text--accent-4 hidden-xs-only"
+        active-class="blue-grey--text text--darken-1"
+      >.rukkie()</router-link>
+      <router-link
+        to="/work"
+        class="text-decoration-none mr-5 deep-purple--text text--accent-4 hidden-xs-only"
+        active-class="blue-grey--text text--darken-1"
+      >.work()</router-link>
       <Contact />
     </v-app-bar>
     <v-main>

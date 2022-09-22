@@ -99,7 +99,7 @@
       </v-col>
     </v-row>
 
-    <v-row class="mt-15">
+    <v-row class="mt-16">
       <v-col
         cols="12"
         sm="4"
@@ -114,7 +114,7 @@
       </v-col>
     </v-row>
 
-    <v-container class="mt-15">
+    <v-container class="mt-16">
       <v-row>
         <v-col cols="12">
           <v-card width="500" color="transparent" flat>

@@ -4,7 +4,7 @@
       width="750"
       flat
       color="transparent"
-      class="mb-15"
+      class="mb-16"
     >
       <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">work(<span class="deep-purple--text text--accent-4 font-weight-light">'Oymo waitlist'</span>)</p>
       <p class="deep-purple--text text--accent-4">// Head of Project, backend and Frontend</p>
@@ -14,7 +14,7 @@
       </p>
     </v-card>
 
-    <v-row class="mt-15">
+    <v-row class="mt-16">
       <v-col
         cols="12"
         sm="4"
@@ -66,12 +66,3 @@
     </v-row>
   </v-container>
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-</style>
