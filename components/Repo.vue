@@ -136,7 +136,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: !true,
+    drawer: true,
     projects: [
       {
         title: 'Oymo',
@@ -204,10 +204,37 @@ export default {
     ],
   }),
 
+  mounted () {
+    this.$nextTick(() => {
+      this.removeBorder()
+      this.drawerVisibility()
+    })
+  },
+
   methods: {
     gotoGithub () {
       window.open("https://github.com/rukkiecodes");
-    }
+    },
+
+    removeBorder () {
+      const border = document.querySelector(".v-navigation-drawer__border")
+      if (border) border.style.display = "none"
+    },
+
+    drawerVisibility () {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return (this.drawer = false)
+        case "sm":
+          return (this.drawer = false)
+        case "md":
+          return (this.drawer = false)
+        case "lg":
+          return (this.drawer = true)
+        case "xl":
+          return (this.drawer = true)
+      }
+    },
   }
 }
 </script>
