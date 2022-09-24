@@ -51,9 +51,9 @@ export default {
       {
         title: 'Oymo backend',
         to: '/oymoWaaitList',
-        icon: 'mdi-vuejs',
-        lang: 'Vue',
-        color: 'teal',
+        icon: 'mdi-nodejs',
+        lang: 'Node',
+        color: 'green',
         avatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1664014178/nodejs_n2acwe.png',
         caption: 'Find friends, and dates around you with just a swipe.'
       },
@@ -78,9 +78,9 @@ export default {
       {
         title: 'BlueZone Finance backend',
         to: '/blueZone',
-        icon: 'mdi-language-javascript',
-        lang: 'Javascript',
-        color: 'orange',
+        icon: 'mdi-nodejs',
+        lang: 'Node',
+        color: 'green',
         avatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1664014178/nodejs_n2acwe.png',
         caption: 'Bluezone Finance is a premium cryptocurrency Trading company, with an open financial system predominantly for the purpose of regenerating invested cryptocurrencies through daily professional trades and Crypto Mining. Bluezone Finance has become a multi-functional cryptocurrency platform, trusted by over thousands of users.'
       },
@@ -114,9 +114,9 @@ export default {
       {
         title: 'Trustpaddi backend',
         to: '/trustpaddi',
-        icon: 'mdi-vuejs',
-        lang: 'Vue',
-        color: 'teal',
+        icon: 'mdi-nodejs',
+        lang: 'Node',
+        color: 'green',
         avatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1664014178/nodejs_n2acwe.png',
         caption: 'TrustPaddi is a payment solution built with escrow protection, which ensures safer and scam free transactions between online vendors, service providers and individuals online.'
       },
