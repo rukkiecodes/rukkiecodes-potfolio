@@ -168,7 +168,7 @@ export default {
       window.open("https://github.com/rukkiecodes");
     },
     gotoLinkedin () {
-      window.open("https://www.linkedin.com/in/terry-amagboro-004830197");
+      window.open("https://www.linkedin.com/in/rukkiecodes");
     },
     gotoResume () {
       window.open("https://docs.google.com/document/d/1VOFordnMhqUqPV4W18j3R9xEW6OAvtAF/edit?usp=sharing&ouid=118220414778609688788&rtpof=true&sd=true");
