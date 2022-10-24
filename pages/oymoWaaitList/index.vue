@@ -59,9 +59,9 @@
         >Oymo</nuxt-link>
         <v-spacer />
         <nuxt-link
-          to="/blueZone"
+          to="/tandom"
           class="deep-purple--text text--accent-4 text-decoration-none"
-        >BlueZone Finance</nuxt-link>
+        >Tandom</nuxt-link>
       </v-toolbar>
     </v-row>
   </v-container>

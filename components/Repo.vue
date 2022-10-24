@@ -166,6 +166,15 @@ export default {
         caption: 'Find friends, and dates around you with just a swipe.'
       },
       {
+        title: 'Tandom editor',
+        to: '/tandom',
+        icon: 'mdi-vuejs',
+        lang: 'Vue',
+        color: 'teal',
+        avatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1666620492/Screenshot_from_2022-10-24_15-07-25_zhimpn.png',
+        caption: 'Quick and easy email drag and drop editor'
+      },
+      {
         title: 'BlueZone Finance',
         to: '/blueZone',
         icon: 'mdi-language-javascript',

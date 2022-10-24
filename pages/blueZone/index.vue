@@ -81,9 +81,9 @@
         flat
       >
         <nuxt-link
-          to="/oymoWaaitList"
+          to="/tandom"
           class="deep-purple--text text--accent-4 text-decoration-none"
-        >Oymo waitlist</nuxt-link>
+        >Tandom</nuxt-link>
         <v-spacer />
         <nuxt-link
           to="/blueZoneAdmin"
