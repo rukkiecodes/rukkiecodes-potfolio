@@ -99,6 +99,27 @@
         Find friends, and dates around you with just a swipe. Are you bored? Enjoy the wide collection of interesting shorts. Like, comment, interact with users, and find love❤️ around you.
       </p>
     </v-card>
+    
+    <v-card
+      flat
+      class="mb-16"
+      color="transparent"
+    >
+      <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4 mt-16">Story time</p>
+      <p class="blue-grey--text text--darken-1">
+        My lofty idea.
+        .
+        <br>
+        So, one day I was watching videos on YouTube and I saw one advert I clicked on it and it took me to one dating website, I did not care for it so I closed it fast. another day again I was coding when I got one email from the same dating website, I opened it and checked it out. it was mostly women. so I explored and checked their pricing, it was quite steep. 1200 naira for 25 points.
+        so I decided to check other dating platforms. some charge as high as 10 thousand naira for 2500 points. and some others were scams, there are no real users in the app but they will take ur money, about 8k or 5k.
+        the only legit ones that have the most ratings and most downloads were baboo and tinder. I checked them out. that was when I learnt that there is a high demand for dating apps. But you don't see people using them in public. or even admit to using it at all.
+        so I had an idea. what if I can make a dating app, elegant and mature enough for people to use in public and not be shy of. something that can in time morph into a fool-blown social app. something that is cheap and is focused on bringing people together. that was where I started developing Oymo.
+        as time passed I get more ideas on how to make it the best dating platform out there. enough to give the others some real competition.
+        After four long months. Oymo is in her testing phase, we thank God for progress to far 😇😇
+        Oymo is currently seeking funds, so don't run when she comes to you 🥺🥺.
+        Good morning everyone 😇😇
+      </p>
+    </v-card>
 
     <v-row
       justify="space-between"
