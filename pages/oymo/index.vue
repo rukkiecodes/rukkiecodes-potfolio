@@ -105,7 +105,7 @@
       class="mb-16"
       color="transparent"
     >
-      <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4 mt-16">Story time</p>
+      <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4 mt-16">Story time!!!</p>
       <p class="blue-grey--text text--darken-1">
         My lofty idea.
         .
