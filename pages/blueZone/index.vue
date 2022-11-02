@@ -81,9 +81,9 @@
         flat
       >
         <nuxt-link
-          to="/tandom"
+          to="/codeblock"
           class="deep-purple--text text--accent-4 text-decoration-none"
-        >Tandom</nuxt-link>
+        >Code block</nuxt-link>
         <v-spacer />
         <nuxt-link
           to="/blueZoneAdmin"

@@ -6,13 +6,13 @@
       color="transparent"
       class="mb-16"
     >
-      <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">work(<span class="deep-purple--text text--accent-4 font-weight-light">'Tandom'</span>)</p>
+      <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">work(<span class="deep-purple--text text--accent-4 font-weight-light">'Code block'</span>)</p>
       <p class="deep-purple--text text--accent-4">// Developer</p>
-      <a href="https://tandomeditor.netlify.app/editor" class="deep-purple--text text--accent-4">// Tandom Demo</a>
-      <a href="https://github.com/rukkiecodes/tandom" class="deep-purple--text text--accent-4">// Github Repo</a>
+      <a href="https://rukkiescodeblock.netlify.app" class="deep-purple--text text--accent-4">// Code block Demo</a>
+      <a href="https://github.com/rukkiecodes/code" class="deep-purple--text text--accent-4">// Github Repo</a>
       <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4">Smart editor</p>
       <p class="blue-grey--text text--darken-1">
-        Easy email drag and drop editor
+        Easy to use. Light-weight editor
       </p>
     </v-card>
 
@@ -26,9 +26,9 @@
           flat
           color="transparent"
         >
-          <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4">About Tandom</p>
+          <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4">About Code block</p>
           <p class="blue-grey--text text--darken-1">
-            An easy email for quick and neat email templating
+            An easy editor for quick and neat code snippet
           </p>
         </v-card>
       </v-col>
@@ -40,7 +40,7 @@
           rounded="lg"
           class="overflow-hidden ma-0 pa-0"
         >
-          <v-img src="https://res.cloudinary.com/rukkiecodes/image/upload/v1666620492/Screenshot_from_2022-10-24_15-07-25_zhimpn.png" />
+          <v-img src="https://res.cloudinary.com/rukkiecodes/image/upload/v1667346265/Screenshot_from_2022-11-02_00-39-45_b0arsw.png" />
         </v-card>
       </v-col>
     </v-row>
@@ -55,14 +55,14 @@
         flat
       >
         <nuxt-link
-          to="/oymoWaaitList"
+          to="/tandom"
           class="deep-purple--text text--accent-4 text-decoration-none"
-        >Oymo waitlist</nuxt-link>
+        >Tandom editor</nuxt-link>
         <v-spacer />
         <nuxt-link
-          to="/codeblock"
+          to="/blueZone"
           class="deep-purple--text text--accent-4 text-decoration-none"
-        >Code block</nuxt-link>
+        >BlueZone Finance</nuxt-link>
       </v-toolbar>
     </v-row>
   </v-container>
