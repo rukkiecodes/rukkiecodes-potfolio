@@ -175,6 +175,15 @@ export default {
         caption: 'Quick and easy email drag and drop editor'
       },
       {
+        title: 'Code block',
+        to: '/codeblock',
+        icon: 'mdi-vuejs',
+        lang: 'Vue',
+        color: 'teal',
+        avatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1667346265/Screenshot_from_2022-11-02_00-39-45_b0arsw.png',
+        caption: 'Quick and easy code snippet editor'
+      },
+      {
         title: 'BlueZone Finance',
         to: '/blueZone',
         icon: 'mdi-language-javascript',
