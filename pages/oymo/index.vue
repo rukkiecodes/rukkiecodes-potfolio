@@ -8,7 +8,7 @@
     >
       <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">work(<span class="deep-purple--text text--accent-4 font-weight-light">'Oymo'</span>)</p>
       <p class="deep-purple--text text--accent-4">// Head of Project, backend and Frontend</p>
-      <p class="deep-purple--text text--accent-4">// Oymo v1 <v-btn depressed outlined rounded color="white" class="text-capitalize" href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40rukkiecodes/oymo-c527f749398c46f2b1882dbca1a89a28-signed.apk">Download Oymo</v-btn></p>
+      <p class="deep-purple--text text--accent-4">// Oymo v1 <v-btn depressed outlined rounded color="white" class="text-capitalize" href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40rukkiecodes/oymo-8abc9c424950437786b327cdf479d230-signed.apk">Download Oymo</v-btn></p>
       <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2 deep-purple--text text--accent-4">The dating giant</p>
       <p class="blue-grey--text text--darken-1">
         As you may know, they are a lot of dating apps and meetup apps. That is expensive and not engaging enough to keep users entertained.😥 This is where Oymo comes in.<br>
