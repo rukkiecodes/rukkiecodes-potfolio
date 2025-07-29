@@ -64,6 +64,37 @@ export const useAppStore = defineStore('app', {
         ],
         to: `/getArtizan`,
       },
+
+      {
+        prependAvatar: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794452/portfolio/recido/react-logo_3x_k11o4w.png',
+        banner: 'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794435/portfolio/recido/Slice_z4rie0.png',
+        title: 'Recido',
+        subtitle: 'Smart Business Management, Simplified',
+        overview: [
+          `Recido is a mobile-first business management app built to help small business owners, freelancers, and artisans handle essential tasks like issuing receipts, invoices, and quotations — all from their smartphones.`,
+          `The platform combines simplicity, professionalism, and smart tools like inventory tracking, customer management, and AI-powered stock suggestions to make everyday business operations faster and easier.`,
+          `Whether you're running a personal hustle or managing a team of sales reps, Recido helps you create polished documents, manage stock, track clients, and stay organized — without the need for complex or expensive software.`
+        ],
+        about: [
+          `Recido is a business management app I built from the ground up to make life easier for small business owners, freelancers, and artisans. It allows users to create and share receipts, invoices, and quotations directly from their phones, helping them run their operations more professionally without needing complex tools.`,
+          `The app also includes inventory tracking, basic customer management, and an AI feature that suggests when it's time to restock fast-moving items. Users can invite sales reps to help with document creation while keeping sensitive data private. Everything is designed to be fast, simple, and secure, so users can focus more on their work and less on paperwork.`,
+          `As the developer behind Recido, I handled everything — from the initial idea and design to the final product and ongoing updates — with a focus on making business tools feel modern, useful, and easy to use.`
+        ],
+        tech: [
+          {title: 'Expo', text: 'for building the mobile app'},
+          {title: 'Firebase', text: 'for user authentication, database, and cloud functions'},
+          {title: 'Node.js', text: 'for backend operations and admin logic'},
+          {title: 'Stream SDK', text: 'for real-time video and voice calling'},
+          {title: 'Stream SDK', text: 'for real-time video and voice calling'},
+        ],
+        images: [
+          'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794436/portfolio/recido/1_lr8n2d.png',
+          'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794436/portfolio/recido/2_z1mtwg.png',
+          'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794438/portfolio/recido/3_azjwaa.png',
+          'https://res.cloudinary.com/rukkiecodes/image/upload/v1753794439/portfolio/recido/4_wlir1u.png',
+        ],
+        to: `/Recido`,
+      },
     ]
   }),
 })
