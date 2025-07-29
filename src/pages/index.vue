@@ -11,7 +11,7 @@
         >
           <v-card-text class="d-flex flex-column justify-center align-center mx-auto">
             <v-avatar size="200">
-              <v-img src="@/assets/IMG_1136.jpg"/>
+              <v-img src="@/assets/IMG_1136.JPG"/>
             </v-avatar>
 
             <v-card-text class="text-h4 font-weight-bold">Terry Amagboro</v-card-text>
@@ -78,7 +78,7 @@
         sm="4"
       >
         <v-img
-          src="@/assets/IMG_11362.jpg"
+          src="@/assets/IMG_11362.JPG"
           rounded="lg"
         />
       </v-col>
