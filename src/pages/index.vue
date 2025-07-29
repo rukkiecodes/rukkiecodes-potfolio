@@ -9,41 +9,33 @@
           height="90vh"
           flat
         >
-          <v-card-text class="d-flex flex-column justify-center align-center mx-auto">
+          <v-card-text
+            class="d-flex flex-column justify-center align-center mx-auto"
+          >
             <v-avatar size="200">
-              <v-img src="@/assets/IMG_1136.JPG"/>
+              <v-img src="@/assets/IMG_1136.JPG" />
             </v-avatar>
 
-            <v-card-text class="text-h4 font-weight-bold">Terry Amagboro</v-card-text>
-            <span class="text-center">Creative frontend developer, designer and illustrator.</span>
+            <v-card-text class="text-h4 font-weight-bold"
+              >Terry Amagboro</v-card-text
+            >
+            <span class="text-center"
+              >I craft elegant user experiences, intuitive interfaces, and
+              visuals that bring ideas to life—across web, mobile, and digital
+              platforms.</span
+            >
 
             <v-card-actions class="d-flex justify-space-between">
-              <v-btn
-                icon
-                depressed
-                @click="gotoFacebook"
-              >
+              <v-btn icon depressed @click="gotoFacebook">
                 <v-icon>mdi-facebook</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                depressed
-                @click="gotoTwitter"
-              >
+              <v-btn icon depressed @click="gotoTwitter">
                 <v-icon>mdi-twitter</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                depressed
-                @click="gotoGithub"
-              >
+              <v-btn icon depressed @click="gotoGithub">
                 <v-icon>mdi-github</v-icon>
               </v-btn>
-              <v-btn
-                icon
-                depressed
-                @click="gotoLinkedin"
-              >
+              <v-btn icon depressed @click="gotoLinkedin">
                 <v-icon>mdi-linkedin</v-icon>
               </v-btn>
             </v-card-actions>
@@ -53,10 +45,7 @@
     </v-row>
 
     <v-row id="work">
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-card color="transparent" class="mx-0 ml-sm-5" flat>
           <v-card-text class="mx-0 px-0 text-h4">
             about(<span>me</span>)<span class="ml-3">{</span>
@@ -76,17 +65,36 @@
               </v-btn>
             </v-col>
 
-            <v-col cols="1"/>
+            <v-col cols="1" />
 
             <v-col cols="11">
-              <span class="text-grey-lighten-1">`
-                <span>Hi, I’m Terry<br>I am a passionate and highly adaptive software developer with over 11 years of experience spanning frontend development, backend systems, and mobile app development.</span>
-                <br>
-                <br>
-                <span>I began my journey in software development as a frontend engineer, crafting seamless user experiences with Vue.js and Vuetify, leveraging material design principles for clean, responsive applications. As my skills matured, I ventured deeper into the backend world, building powerful APIs using REST, Socket.IO, and GraphQL, and managing data with Firebase and MongoDB.</span>
-                <br>
-                <br>
-                <span>Over the years, I’ve evolved into a full-fledged product builder, combining development, UI/UX design, and problem-solving to deliver robust, scalable, and user-centric digital solutions.</span>`
+              <span class="text-grey-lighten-1"
+                >`
+                <span
+                  >Hi, I’m Terry<br />I am a passionate and highly adaptive
+                  software developer with over 11 years of experience spanning
+                  frontend development, backend systems, and mobile app
+                  development.</span
+                >
+                <br />
+                <br />
+                <span
+                  >I began my journey in software development as a frontend
+                  engineer, crafting seamless user experiences with Vue.js and
+                  Vuetify, leveraging material design principles for clean,
+                  responsive applications. As my skills matured, I ventured
+                  deeper into the backend world, building powerful APIs using
+                  REST, Socket.IO, and GraphQL, and managing data with Firebase
+                  and MongoDB.</span
+                >
+                <br />
+                <br />
+                <span
+                  >Over the years, I’ve evolved into a full-fledged product
+                  builder, combining development, UI/UX design, and
+                  problem-solving to deliver robust, scalable, and user-centric
+                  digital solutions.</span
+                >`
               </span>
             </v-col>
           </v-row>
@@ -94,46 +102,30 @@
         </v-card>
       </v-col>
 
-      <v-col
-        cols="12"
-        sm="6"
-      >
-        <Repo/>
+      <v-col cols="12" sm="6">
+        <Repo />
       </v-col>
     </v-row>
 
     <v-row class="mt-16">
-      <v-col
-        cols="12"
-        sm="4"
-      >
-        <v-img
-          src="@/assets/IMG_11362.JPG"
-          rounded="lg"
-        />
+      <v-col cols="12" sm="4">
+        <v-img src="@/assets/IMG_11362.JPG" rounded="lg" />
       </v-col>
-      <v-col
-        cols="12"
-        sm="8"
-      >
-        <Skills/>
+      <v-col cols="12" sm="8">
+        <Skills />
       </v-col>
     </v-row>
 
     <v-row class="mt-16">
       <v-col cols="12">
-        <v-card
-          max-width="900"
-          color="transparent"
-          flat
-        >
+        <v-card max-width="900" color="transparent" flat>
           <p>Thanks for checking my website!</p>
-          <p class="text-blue-grey-darken-1">// It's a work in progress so check back often!</p>
-          <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">Check out my
-            <router-link
-              to="/HealthTok"
-              class="text-indigo-accent-4"
-            >
+          <p class="text-blue-grey-darken-1">
+            // It's a work in progress so check back often!
+          </p>
+          <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">
+            Check out my
+            <router-link to="/HealthTok" class="text-indigo-accent-4">
               Selected works
             </router-link>
             for more details.
@@ -150,21 +142,23 @@ export default {
   name: "IndexPage",
   data: () => ({}),
   methods: {
-    gotoFacebook () {
+    gotoFacebook() {
       window.open("https://www.facebook.com/Rukkiecodes");
     },
-    gotoTwitter () {
+    gotoTwitter() {
       window.open("https://twitter.com/rukkiecodes");
     },
-    gotoGithub () {
+    gotoGithub() {
       window.open("https://github.com/rukkiecodes");
     },
-    gotoLinkedin () {
+    gotoLinkedin() {
       window.open("https://www.linkedin.com/in/rukkiecodes");
     },
-    gotoResume () {
-      window.open("https://docs.google.com/document/d/1VOFordnMhqUqPV4W18j3R9xEW6OAvtAF/edit?usp=sharing&ouid=118220414778609688788&rtpof=true&sd=true");
-    }
-  }
-}
+    gotoResume() {
+      window.open(
+        "https://docs.google.com/document/d/1VOFordnMhqUqPV4W18j3R9xEW6OAvtAF/edit?usp=sharing&ouid=118220414778609688788&rtpof=true&sd=true"
+      );
+    },
+  },
+};
 </script>
