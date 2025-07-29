@@ -20,7 +20,7 @@
             .rukkie()
           </router-link>
           <router-link
-            to="/work"
+            to="/HealthTok"
             class="d-none d-sm-flex text-decoration-none text-indigo-accent-4 font-weight-bold"
             active-class="text-decoration-underline"
           >
@@ -62,7 +62,7 @@ import {ref} from "vue";
 
 const routes = ref([
   {title: ".rukkie()", to: "/"},
-  {title: ".work()", to: "/work"},
+  {title: ".work()", to: "/HealthTok"},
 ]);
 </script>
 

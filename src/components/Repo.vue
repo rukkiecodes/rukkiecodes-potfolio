@@ -15,7 +15,7 @@
       <v-spacer/>
 
       <v-btn
-        to="/work"
+        to="/HealthTok"
         color="deep-purple accent-4"
         variant="flat"
         rounded="lg"

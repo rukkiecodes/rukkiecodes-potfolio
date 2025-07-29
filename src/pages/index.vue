@@ -101,7 +101,7 @@
           <p class="text-blue-grey-darken-1">// It's a work in progress so check back often!</p>
           <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">Check out my
             <router-link
-              to="/work"
+              to="/HealthTok"
               class="text-indigo-accent-4"
             >
               Selected works

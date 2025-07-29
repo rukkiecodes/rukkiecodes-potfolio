@@ -52,12 +52,12 @@
         cols="12"
         sm="6"
         md="4"
-        lg="3"
+        :lg="projectData?.wide ? 6 : 3"
         v-for="(image, index) in projectData?.images"
         :key="index"
       >
-        <v-card rounded="lg" class="pa-0 ma-0" flat color="transparent">
-          <v-img min-height="550" :src="image" />
+        <v-card rounded="lg" class="pa-0 ma-0" flat color="transparent" :height="projectData?.wide ? 350 : null">
+          <v-img min-height="550" :src="image" :cover="projectData?.wide" />
         </v-card>
       </v-col>
     </v-row>
