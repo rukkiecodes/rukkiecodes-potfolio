@@ -17,6 +17,36 @@
             <v-card-text class="text-h4 font-weight-bold">Terry Amagboro</v-card-text>
             <span class="text-center">Creative frontend developer, designer and illustrator.</span>
 
+            <v-card-actions class="d-flex justify-space-between">
+              <v-btn
+                icon
+                depressed
+                @click="gotoFacebook"
+              >
+                <v-icon>mdi-facebook</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                depressed
+                @click="gotoTwitter"
+              >
+                <v-icon>mdi-twitter</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                depressed
+                @click="gotoGithub"
+              >
+                <v-icon>mdi-github</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                depressed
+                @click="gotoLinkedin"
+              >
+                <v-icon>mdi-linkedin</v-icon>
+              </v-btn>
+            </v-card-actions>
           </v-card-text>
         </v-card>
       </v-col>
@@ -115,3 +145,26 @@
   </v-container>
 </template>
 
+<script>
+export default {
+  name: "IndexPage",
+  data: () => ({}),
+  methods: {
+    gotoFacebook () {
+      window.open("https://www.facebook.com/Rukkiecodes");
+    },
+    gotoTwitter () {
+      window.open("https://twitter.com/rukkiecodes");
+    },
+    gotoGithub () {
+      window.open("https://github.com/rukkiecodes");
+    },
+    gotoLinkedin () {
+      window.open("https://www.linkedin.com/in/rukkiecodes");
+    },
+    gotoResume () {
+      window.open("https://docs.google.com/document/d/1VOFordnMhqUqPV4W18j3R9xEW6OAvtAF/edit?usp=sharing&ouid=118220414778609688788&rtpof=true&sd=true");
+    }
+  }
+}
+</script>
