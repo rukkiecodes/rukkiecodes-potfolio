@@ -4,9 +4,10 @@
       <v-col cols="12">
         <v-card rounded="lg" class="pa-0 ma-0" color="transparent" flat>
           <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">
-            work(<span class="text-indigo-accent-4 font-weight-light"
-              >'{{ projectData?.title }}'</span
-            >)
+            work(<span @click="openLink(projectData?.link)"
+                       class="text-indigo-accent-4 font-weight-light cursor-pointer text-decoration-underline"
+          >'{{ projectData?.title }}'</span
+          >)
           </p>
           <p class="font-weight-bold text-h6 text-indigo-accent-4 mb-10">
             {{ projectData?.subtitle }}
@@ -15,7 +16,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-img max-height="550" :src="projectData?.banner" rounded="lg" />
+        <v-img max-height="550" :src="projectData?.banner" rounded="lg"/>
       </v-col>
     </v-row>
 
@@ -30,7 +31,7 @@
         :key="index"
         class="text-grey-lighten-1"
       >
-        {{ line }}<br /><br />
+        {{ line }}<br/><br/>
       </p>
 
       <p
@@ -43,7 +44,7 @@
         :key="index"
         class="text-grey-lighten-1"
       >
-        {{ line }}<br /><br />
+        {{ line }}<br/><br/>
       </p>
     </v-card>
 
@@ -57,7 +58,7 @@
         :key="index"
       >
         <v-card rounded="lg" class="pa-0 ma-0" flat color="transparent" :height="projectData?.wide ? 350 : null">
-          <v-img min-height="550" :src="image" :cover="projectData?.wide" />
+          <v-img min-height="550" :src="image" :cover="projectData?.wide"/>
         </v-card>
       </v-col>
     </v-row>
@@ -65,7 +66,7 @@
 </template>
 
 <script>
-import { useAppStore } from "@/stores/app.js";
+import {useAppStore} from "@/stores/app.js";
 
 export default {
   data: () => ({
@@ -73,10 +74,17 @@ export default {
   }),
 
   setup() {
-    const { projects } = useAppStore();
+    const {projects} = useAppStore();
     return {
       projects,
     };
+  },
+
+  methods: {
+    openLink(link) {
+      if (!link) return;
+      window.open(link);
+    },
   },
 
   mounted() {

@@ -11,6 +11,7 @@ export const useAppStore = defineStore("app", {
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753787593/portfolio/healthTok/Slice_4_e4jzlx.png",
         title: "HealthTok",
         subtitle: "Telemedicine Reimagined",
+        link: "",
         overview: [
           `HealthTok is a telemedicine platform that connects patients with licensed medical professionals for remote consultations. Users can sign up as either Doctors or Patients, with doctors submitting their credentials for review before being approved to offer services.`,
           `Once verified, doctors can be discovered by patients who can then book consultations, communicate via video, voice, or chat, and receive expert care without leaving home. The platform also supports voice notes and secure in-app communication to ensure accessibility and convenience for every user.`,
@@ -53,6 +54,7 @@ export const useAppStore = defineStore("app", {
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753790588/portfolio/getArtizan/Slice_emjxw7.jpg",
         title: "getArtizan",
+        link: "",
         subtitle: "Find & Hire Skilled Artisans Nearby",
         overview: [
           `getArtizan is a location-based platform that connects skilled artisans and service providers with people who need their expertise. Whether you're looking for a plumber, electrician, carpenter, or any other craftsperson, getArtizan makes it easy to find, hire, and communicate with local talent directly from your phone.`,
@@ -95,6 +97,7 @@ export const useAppStore = defineStore("app", {
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753794435/portfolio/recido/Slice_z4rie0.png",
         title: "Recido",
+        link: "",
         subtitle: "Smart Business Management, Simplified",
         overview: [
           `Recido is a mobile-first business management app built to help small business owners, freelancers, and artisans handle essential tasks like issuing receipts, invoices, and quotations — all from their smartphones.`,
@@ -138,6 +141,7 @@ export const useAppStore = defineStore("app", {
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753800513/portfolio/metronet/banner_n1envt.png",
         title: "Metronet Chiropractic Clinic",
+        link: "https://next-chiropractor.netlify.app",
         subtitle: "Natural Healing Through Experience",
         overview: [
           `Metronet Chiropractic Clinic is a trusted care provider offering natural, science-based treatments for patients across the Twin Cities metro area. Established in 2003 by Dr. Chris Fokumlah, the clinic specializes in treating injuries from auto accidents, workplace incidents, sports activities, and more, while also supporting long-term wellness and recovery.`,
@@ -164,6 +168,7 @@ export const useAppStore = defineStore("app", {
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753802199/portfolio/Nne-Grace/Screenshot_2025-07-29_161625_tobne0.png",
         title: "Nne-Grace Internationa",
+        link: "https://nne-grace.netlify.app",
         subtitle: "Nne-Grace International Foundation – Grace in Action",
         overview: [
           `Nne-Grace International Foundation is a non-profit organization dedicated to improving the lives of underserved and less privileged communities through grace, compassion, and education. Rooted in a mission to bring healthcare access and life opportunities to those who need them most, the foundation serves as a beacon of hope in places where hopelessness often prevails.`,
@@ -185,10 +190,37 @@ export const useAppStore = defineStore("app", {
 
       {
         prependAvatar:
+          "https://res.cloudinary.com/rukkiecodes/image/upload/v1754875771/Logo_vzaypx_zatajs.png",
+        banner:
+          "https://res.cloudinary.com/rukkiecodes/image/upload/v1754876284/Screenshot_2025-08-11_023630_wgcqpu.png",
+        title: "NDDC",
+        link: "https://ndd-fe.netlify.app",
+        subtitle: "Niger Delta Development Commission",
+        overview: [
+          `Nne-Grace International Foundation is a non-profit organization dedicated to improving the lives of underserved and less privileged communities through grace, compassion, and education. Rooted in a mission to bring healthcare access and life opportunities to those who need them most, the foundation serves as a beacon of hope in places where hopelessness often prevails.`,
+          `Since its launch in 2017, Nne-Grace has led grassroots health missions and educational outreach, with a special focus on disease prevention and awareness in rural Nigerian communities. The foundation continues to impact lives through the power of knowledge, driven by faith and the generosity of its supporters.`,
+        ],
+        about: [
+          `Creating a future where the delta's natural resources are preserved for future generations, while also improving the quality of life for its residents. This will require commitment, collaboration, and innovative solutions that the NDDC is willing and ready to achieve.`,
+          `Quality Management that provides methodical planning with agile execution, empowering teams to deliver high-quality outcomes while maximizing efficiency and minimizing disruptions.`,
+          `Get the latest updates on our projects and programmes across the nine states of the Niger Delta region. Gain in-depth insights and analyses of developmental trends within the region, as well as the impact of our projects and programmes on the people, along with projections for future development.`,
+        ],
+        tech: [],
+        wide: true,
+        images: [
+          `https://res.cloudinary.com/rukkiecodes/image/upload/v1754876284/Screenshot_2025-08-11_023745_chx8xl.png`,
+          `https://res.cloudinary.com/rukkiecodes/image/upload/v1754876284/Screenshot_2025-08-11_023703_fycqcg.png`,
+        ],
+        to: `/NDDC`,
+      },
+
+      {
+        prependAvatar:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753802718/portfolio/WT%20v3/logo_rwijky_vf5t1o.png",
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753802620/portfolio/WT%20v3/Screenshot_2025-07-29_162300_zuzsrr.png",
         title: "Wanlainjo Tech Hub (V2)",
+        link: "https://wanlainjowebsite.netlify.app",
         subtitle: "A Fresh Digital Face for a Future-Driven Brand",
         overview: [
           `Wanlainjo Tech Hub is an intensive training program designed to equip aspiring developers with the practical skills needed to thrive in today’s tech-driven world. Over the course of 16 immersive weeks, students go from learning basic programming concepts to building full-stack web applications using JavaScript, Python, MySQL, and modern development tools.`,
@@ -211,6 +243,7 @@ export const useAppStore = defineStore("app", {
         banner:
           "https://res.cloudinary.com/rukkiecodes/image/upload/v1753803250/portfolio/WT%20v3/Screenshot_2025-07-29_163304_vvqi3e.png",
         title: "Wanlainjo Tech Hub (V1)",
+        link: "https://next-wanlainjo.netlify.app/home",
         subtitle: "Empowering the Next Generation of Developers",
         overview: [
           `After previously collaborating with Wanlainjo Tech Hub, I was brought back to redesign and rebuild their website—a testament to our strong working relationship and their trust in my ability to deliver. The updated site offers a cleaner, more intuitive experience for prospective students and partners, while better reflecting the Tech Hub's mission to train the next generation of web developers.`,
