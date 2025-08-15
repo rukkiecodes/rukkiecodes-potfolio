@@ -26,6 +26,13 @@
           >
             .work()
           </router-link>
+          <router-link
+            to="/kitchen"
+            class="d-none d-sm-flex text-decoration-none text-indigo-accent-4 font-weight-bold"
+            active-class="text-decoration-underline"
+          >
+            .kitchen()
+          </router-link>
           <Contact/>
 
           <v-menu>
@@ -63,6 +70,7 @@ import {ref} from "vue";
 const routes = ref([
   {title: ".rukkie()", to: "/"},
   {title: ".work()", to: "/HealthTok"},
+  {title: ".kitchen()", to: "/kitchen"},
 ]);
 </script>
 

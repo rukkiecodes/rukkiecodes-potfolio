@@ -12,7 +12,13 @@
   "dependencies": {
     "@fontsource/roboto": "5.2.6",
     "@mdi/font": "7.4.47",
+    "highlight.js": "^11.11.1",
+    "marked": "^16.1.2",
+    "marked-highlight": "^2.2.2",
+    "monaco-editor": "^0.52.2",
     "pinia": "^3.0.3",
+    "prismjs": "^1.30.0",
+    "shiki": "^3.9.2",
     "vue": "^3.5.17",
     "vuetify": "^3.9.1"
   },
