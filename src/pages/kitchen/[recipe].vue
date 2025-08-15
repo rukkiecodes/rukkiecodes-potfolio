@@ -22,7 +22,7 @@
               lang="shell"
               :code="recipe?.installation"
               theme="vs-dark"
-              height="90px"
+              height="220px"
             />
           </v-col>
 
@@ -32,7 +32,7 @@
               lang="shell"
               :code="recipe?.code"
               theme="vs-dark"
-              height="400px"
+              height="800px"
             />
           </v-col>
 
@@ -42,7 +42,17 @@
               lang="shell"
               :code="recipe?.usage"
               theme="vs-dark"
-              height="160px"
+              height="800px"
+            />
+          </v-col>
+
+          <v-col cols="12">
+            <p>⚙️ Configuration</p>
+            <CodeBlock
+              lang="shell"
+              :code="recipe?.configuration"
+              theme="vs-dark"
+              height="500px"
             />
           </v-col>
         </v-row>
@@ -53,16 +63,6 @@
           <v-col cols="12">
             <p>📖 Documentation</p>
             <MarkdownRenderer :content="recipe?.documentation" />
-          </v-col>
-
-          <v-col cols="12">
-            <p>⚙️ Configuration</p>
-            <CodeBlock
-              lang="shell"
-              :code="recipe?.configuration"
-              theme="vs-dark"
-              height="160px"
-            />
           </v-col>
         </v-row>
       </v-col>
