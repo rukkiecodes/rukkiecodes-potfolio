@@ -5,6 +5,7 @@ export const useKitchenStore = defineStore("kitchen", {
     kitchenList: [
       {
         id: 1,
+        height: 250,
         name: "Firebase Setup for Expo Projects",
         description: "Complete Firebase Authentication & Firestore setup with persistent sessions for Expo React Native apps. Includes user state management and automatic reconnection across app restarts.",
         installation: `# Install Firebase SDK and AsyncStorage for persistence
@@ -370,6 +371,7 @@ EXPO_PUBLIC_APP_VERSION=1.0.0`
       // Add this to your kitchenList array
       {
         id: 2,
+        height: 250,
         name: "Expo Push Notifications with React Context",
         description: "Complete push notification system for Expo apps with React Context, Firebase integration, and automatic token management. Handles foreground/background notifications and navigation routing.",
         installation: `# Install required Expo notification packages
@@ -931,6 +933,136 @@ EXPO_PUBLIC_AUTO_NAVIGATE_ON_NOTIFICATION=true
 # Production Settings (optional)
 EXPO_PUBLIC_NOTIFICATION_SOUND=default
 EXPO_PUBLIC_VIBRATION_PATTERN=[0,250,250,250]`
+      },
+
+      // Add this as item #4 in your kitchenList array
+      {
+        id: 3,
+        height: 50,
+        name: "Simple Blob Converter for File Uploads",
+        description: "A simple function that converts mobile files (photos, videos, documents) into blobs that can be uploaded to cloud storage. Takes a file path and returns upload-ready blob data.",
+        installation: `# No special packages needed - works with vanilla React Native/Expo
+# Just save the function and use it`,
+        code: `// utils/blobConverter.js
+/**
+ * Simple Blob Converter
+ * Converts mobile file paths to uploadable blobs
+ *
+ * @param file - Local file path (file://path/to/file.jpg)
+ * @returns Promise<Blob> - Blob ready for upload
+ */
+export default async (file) => {
+  const blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
+    xhr.onload = () => resolve(xhr.response)
+    xhr.responseType = 'blob'
+    xhr.open('GET', file, true)
+    xhr.send(null)
+  })
+  return blob
+}`,
+        usage: `// How to use the blob converter
+import blobConverter from './utils/blobConverter';
+
+// Basic usage
+const uploadPhoto = async () => {
+  try {
+    // 1. Get photo path (from camera/gallery picker)
+    const photoPath = 'file://path/to/your/photo.jpg';
+
+    // 2. Convert to blob
+    const photoBlob = await blobConverter(photoPath);
+
+    // 3. Now upload the blob to any service
+    console.log('Blob ready for upload!', photoBlob);
+
+    // Upload to your preferred service (Firebase, AWS, etc.)
+    // const uploadResult = await yourUploadService.upload(photoBlob);
+
+  } catch (error) {
+    console.log('Conversion failed:', error);
+  }
+};
+
+// Works with any file type
+const convertAnyFile = async (filePath) => {
+  const blob = await blobConverter(filePath);
+  return blob; // Ready to upload
+};
+
+// Example with different file types
+const handleDifferentFiles = async () => {
+  // Photo
+  const photoBlob = await blobConverter('file://path/photo.jpg');
+
+  // Video
+  const videoBlob = await blobConverter('file://path/video.mp4');
+
+  // Document
+  const docBlob = await blobConverter('file://path/document.pdf');
+
+  // All ready for upload!
+};`,
+        documentation: `# Simple Blob Converter Guide
+
+## What is a Blob?
+
+A **Blob** is like a container that holds file data in a format that can be uploaded to the internet.
+
+Think of it like this:
+- Your phone has a photo → **Blob converter** → Ready to upload
+
+## What This Function Does
+
+1. **Takes a file path** - You give it the location of your file
+2. **Reads the file** - Opens and reads the file data
+3. **Converts to blob** - Turns it into upload-ready format
+4. **Returns the blob** - Gives you back the blob
+
+## How to Use It
+
+### Step 1: Save the function
+Create \`utils/blobConverter.js\` and put the function in it.
+
+### Step 2: Use it in your app
+\`\`\`javascript
+import blobConverter from './utils/blobConverter';
+
+// Convert any file to blob
+const filePath = 'file://path/to/your/file.jpg';
+const fileBlob = await blobConverter(filePath);
+
+// Now fileBlob is ready to upload anywhere
+\`\`\`
+
+### Step 3: Upload the blob
+\`\`\`javascript
+const uploadFile = async (filePath) => {
+  // Convert file to blob first
+  const blob = await blobConverter(filePath);
+
+  // Upload the blob (works with any upload service)
+  const result = await someUploadService.upload(blob);
+};
+\`\`\`
+
+## Why Do You Need This?
+
+- Mobile files can't be uploaded directly
+- Blob format is what upload services expect
+- This converter makes your file upload-ready
+
+## That's It!
+
+Give it a file path → Get back an upload-ready blob. Simple!`,
+        configuration: `# No configuration needed
+# Just import and use the function
+
+# Works with any file type:
+# - Photos: .jpg, .png, .gif
+# - Videos: .mp4, .mov, .avi
+# - Documents: .pdf, .doc, .txt
+# - Any file type your app supports`
       }
     ],
   }),

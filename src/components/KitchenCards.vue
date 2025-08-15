@@ -1,5 +1,5 @@
 <template>
-  <v-col v-for="(item, index) in kitchenList" :key="index" cols="12" sm="6" md="6" lg="6">
+  <v-col v-for="(item, index) in kitchenList" :key="index" cols="12" sm="6" md="6" lg="6" class="mb-16">
     <router-link :to="`/kitchen/${item.name}`" class="text-h6 text-sm-h5 text-white font-weight-bold">{{ item.name }}</router-link>
     <p class="text-body-2 text-body-1 text-grey-lighten-1">{{ item.description }}</p>
 
@@ -9,7 +9,7 @@
           lang="shell"
           :code="item.installation"
           theme="vs-dark"
-          height="250px"
+          :height="`${item?.height}px`"
         />
       </v-col>
 

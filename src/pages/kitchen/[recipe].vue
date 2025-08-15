@@ -21,7 +21,7 @@
               lang="shell"
               :code="recipe?.installation"
               theme="vs-dark"
-              height="250px"
+              :height="`${recipe?.height}px`"
             />
           </v-col>
 
