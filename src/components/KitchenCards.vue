@@ -9,7 +9,7 @@
           lang="shell"
           :code="item.installation"
           theme="vs-dark"
-          height="90px"
+          height="250px"
         />
       </v-col>
 

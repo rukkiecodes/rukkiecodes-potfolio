@@ -366,6 +366,572 @@ NODE_ENV=development
 EXPO_PUBLIC_APP_NAME=Your App Name
 EXPO_PUBLIC_APP_VERSION=1.0.0`
       },
+
+      // Add this to your kitchenList array
+      {
+        id: 2,
+        name: "Expo Push Notifications with React Context",
+        description: "Complete push notification system for Expo apps with React Context, Firebase integration, and automatic token management. Handles foreground/background notifications and navigation routing.",
+        installation: `# Install required Expo notification packages
+npx expo install expo-notifications expo-device expo-constants
+
+# Install Firebase for token storage (if not already installed)
+npm install firebase @react-native-async-storage/async-storage
+
+# Install development client (recommended for testing)
+npx expo install expo-dev-client
+
+# Test on physical device (simulators don't support push notifications)
+npx expo run:android
+npx expo run:ios`,
+        code: `// context/notification.tsx
+import React, { createContext, useState, useEffect, useRef, useContext, ReactNode } from 'react';
+import * as Notifications from 'expo-notifications';
+import { registerForPushNotificationsAsync } from '@/libraries/registerForPushNotificationAsync';
+import { router } from 'expo-router';
+
+// Configure notification behavior
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
+
+interface NotificationContextProps {
+  expoPushToken: string | null;
+  notification: Notifications.Notification | null;
+  error: Error | null;
+  scheduleNotification: (
+    to?: string,
+    title?: string,
+    body?: string,
+    data?: any
+  ) => Promise<void>;
+}
+
+const NotificationContext = createContext<NotificationContextProps | undefined>(undefined);
+
+export const useNotification = (): NotificationContextProps => {
+  const context = useContext(NotificationContext);
+  if (!context) {
+    throw new Error('useNotification must be used within a NotificationProvider');
+  }
+  return context;
+};
+
+interface NotificationProviderProps {
+  children: ReactNode;
+}
+
+export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
+  const [expoPushToken, setExpoPushToken] = useState<string | null>(null);
+  const [notification, setNotification] = useState<Notifications.Notification | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+
+  const notificationListener = useRef<Notifications.Subscription | null>(null);
+  const responseListener = useRef<Notifications.Subscription | null>(null);
+
+  // Handle notification taps (background -> foreground)
+  useEffect(() => {
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      const data = response?.notification?.request?.content?.data;
+
+      // Navigate based on notification data
+      if (data?.type === 'call' && data?.route) {
+        router.push({
+          pathname: data.route,
+          params: {
+            chatId: data.chatId,
+            callType: data.callType,
+            caller: JSON.stringify(data.caller),
+          }
+        });
+      }
+    });
+
+    return () => {
+      if (responseListener.current) {
+        Notifications.removeNotificationSubscription(responseListener.current);
+      }
+    };
+  }, []);
+
+  // Initialize notifications and handle foreground notifications
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializeNotifications = async () => {
+      try {
+        const token = await registerForPushNotificationsAsync();
+        if (isMounted) {
+          setExpoPushToken(token || null);
+        }
+      } catch (err: any) {
+        if (isMounted) {
+          setError(err);
+        }
+      }
+
+      // Handle notifications received while app is in foreground
+      notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
+        const data = notification.request.content.data;
+        setNotification(notification);
+
+        // Auto-navigate for certain notification types
+        if (data?.type === 'call' && data?.route) {
+          router.push({
+            pathname: data.route,
+            params: {
+              chatId: data.chatId,
+              callType: data.callType,
+              caller: JSON.stringify(data.caller),
+            }
+          });
+        }
+      });
+    };
+
+    initializeNotifications();
+
+    return () => {
+      isMounted = false;
+      if (notificationListener.current) {
+        Notifications.removeNotificationSubscription(notificationListener.current);
+      }
+      if (responseListener.current) {
+        Notifications.removeNotificationSubscription(responseListener.current);
+      }
+    };
+  }, []);
+
+  // Send push notification via Expo's API
+  const scheduleNotification = async (
+    token: string = expoPushToken || '',
+    title: string = '',
+    body: string = '',
+    data: any = null
+  ) => {
+    if (!token) {
+      console.warn('No push token available');
+      return;
+    }
+
+    const message = {
+      to: token,
+      sound: 'notification',
+      title,
+      body,
+      data: { ...data, meta: { source: 'app', timestamp: Date.now() } }
+    };
+
+    try {
+      const response = await fetch('https://exp.host/--/api/v2/push/send', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      });
+
+      if (!response.ok) {
+        throw new Error(\`HTTP error! status: \${response.status}\`);
+      }
+
+      console.log('✅ Notification sent successfully');
+    } catch (error) {
+      console.error('❌ Failed to send notification:', error);
+      throw error;
+    }
+  };
+
+  return (
+    <NotificationContext.Provider
+      value={{
+        expoPushToken,
+        notification,
+        error,
+        scheduleNotification,
+      }}
+    >
+      {children}
+    </NotificationContext.Provider>
+  );
+};`,
+        usage: `// How to use in your components
+import { useNotification } from '@/context/notification';
+
+const MessageScreen = ({ chatId }: { chatId: string }) => {
+  const { scheduleNotification, expoPushToken } = useNotification();
+
+  const sendCallNotification = async (userData: any, callType: 'video' | 'voice') => {
+    try {
+      await scheduleNotification(
+        userData?.expoPushNotificationToken, // Recipient's token
+        '📞 Incoming Call',
+        \`You have a \${callType} call from Dr. Smith\`,
+        {
+          chatId,
+          type: 'call',
+          callType,
+          route: '/call-screen',
+          caller: {
+            id: 'doctor123',
+            name: 'Dr. Smith',
+            avatar: 'https://example.com/avatar.jpg'
+          }
+        }
+      );
+
+      console.log('Call notification sent!');
+    } catch (error) {
+      console.error('Failed to send notification:', error);
+    }
+  };
+
+  const sendMessageNotification = async (recipientToken: string, message: string) => {
+    await scheduleNotification(
+      recipientToken,
+      '💬 New Message',
+      message,
+      {
+        chatId,
+        type: 'message',
+        route: '/chat',
+        timestamp: Date.now()
+      }
+    );
+  };
+
+  return (
+    <View>
+      <Text>Push Token: {expoPushToken}</Text>
+      <Button
+        title="Send Test Call"
+        onPress={() => sendCallNotification(userData, 'video')}
+      />
+    </View>
+  );
+};
+
+// Wrap your app in _layout.tsx
+export default function RootLayout() {
+  return (
+    <NotificationProvider>
+      <ThemeProvider>
+        <Slot />
+      </ThemeProvider>
+    </NotificationProvider>
+  );
+}`,
+        documentation: `# 📱 Expo Push Notifications with React Context
+
+A complete push notification system for Expo React Native apps featuring React Context state management, Firebase token storage, automatic navigation routing, and support for foreground/background notifications.
+
+---
+
+## ✨ What You Get
+
+- 🔔 **Push Notification Context** - Global notification state management
+- 📱 **Device Registration** - Automatic push token generation and storage
+- 🚀 **Auto Navigation** - Route users based on notification data
+- 🔄 **Background Handling** - Works when app is backgrounded or closed
+- 💾 **Firebase Integration** - Store tokens in Firestore for easy retrieval
+- 🎯 **TypeScript Ready** - Full type safety and IntelliSense
+- ⚡ **Real-time Updates** - Instant notification delivery
+
+---
+
+## 🧾 Installation & Setup
+
+\`\`\`bash
+# Install Expo notification packages
+npx expo install expo-notifications expo-device expo-constants
+
+# Install dependencies for token storage
+npm install firebase @react-native-async-storage/async-storage
+
+# Install development client (recommended for testing)
+npx expo install expo-dev-client
+\`\`\`
+
+---
+
+## 📋 Prerequisites
+
+1. **EAS Project Setup**
+   - Configure your \`app.config.js\` with EAS project ID
+   - Push notifications require EAS Build or Expo Go on physical device
+
+2. **Firebase Project** (for token storage)
+   - Setup Firestore database
+   - Configure authentication (optional but recommended)
+
+---
+
+## ⚙️ Configuration
+
+### App Config (app.config.js)
+\`\`\`javascript
+export default {
+  expo: {
+    name: "Your App",
+    slug: "your-app",
+    extra: {
+      eas: {
+        projectId: "your-eas-project-id" // Required for push tokens
+      }
+    },
+    plugins: [
+      [
+        "expo-notifications",
+        {
+          icon: "./assets/notification-icon.png", // Optional
+          color: "#ffffff", // Optional
+          sounds: ["./assets/notification-sound.wav"] // Optional
+        }
+      ]
+    ]
+  }
+};
+\`\`\`
+
+### Registration Helper (libraries/registerForPushNotificationAsync.ts)
+\`\`\`typescript
+import * as Notifications from 'expo-notifications';
+import * as Device from 'expo-device';
+import Constants from 'expo-constants';
+import { Platform, Alert } from 'react-native';
+import { doc, updateDoc } from 'firebase/firestore';
+import { auth, db } from '@/utils/firebase';
+
+export async function registerForPushNotificationsAsync(): Promise<string | undefined> {
+  let token: string | undefined;
+
+  // Configure Android notification channel
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  // Check if running on physical device
+  if (!Device.isDevice) {
+    Alert.alert('Error', 'Push notifications require a physical device');
+    return;
+  }
+
+  try {
+    // Request permissions
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+
+    if (finalStatus !== 'granted') {
+      Alert.alert('Error', 'Push notification permission denied');
+      return;
+    }
+
+    // Get Expo project ID
+    const projectId = Constants?.expoConfig?.extra?.eas?.projectId ??
+                     Constants?.easConfig?.projectId;
+
+    if (!projectId) {
+      throw new Error('Missing Expo project ID');
+    }
+
+    // Generate push token
+    token = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
+
+    // Save token to Firebase (optional)
+    const userId = auth.currentUser?.uid;
+    if (userId && token) {
+      await updateDoc(doc(db, 'users', userId), {
+        expoPushNotificationToken: token,
+        tokenUpdatedAt: new Date()
+      });
+    }
+
+    return token;
+  } catch (error) {
+    console.error('Push notification registration failed:', error);
+    throw error;
+  }
+}
+\`\`\`
+
+---
+
+## 🚀 Usage Examples
+
+### Basic Notification
+\`\`\`typescript
+const { scheduleNotification } = useNotification();
+
+// Simple text notification
+await scheduleNotification(
+  userToken,
+  'Hello!',
+  'This is a test notification',
+  { type: 'test' }
+);
+\`\`\`
+
+### Call Notification with Auto-Navigation
+\`\`\`typescript
+const sendCallNotification = async (recipientToken: string) => {
+  await scheduleNotification(
+    recipientToken,
+    '📞 Incoming Video Call',
+    'Dr. Smith is calling you',
+    {
+      type: 'call',
+      callType: 'video',
+      route: '/call-screen',
+      chatId: 'chat_123',
+      caller: {
+        id: 'doctor_456',
+        name: 'Dr. Smith',
+        specialty: 'Cardiology'
+      }
+    }
+  );
+};
+\`\`\`
+
+### Message Notification
+\`\`\`typescript
+const sendMessageNotification = async (recipientToken: string, message: string) => {
+  await scheduleNotification(
+    recipientToken,
+    '💬 New Message',
+    message.substring(0, 50) + '...',
+    {
+      type: 'message',
+      route: '/chat',
+      chatId: 'chat_123',
+      senderId: 'user_789'
+    }
+  );
+};
+\`\`\`
+
+---
+
+## 🎯 Navigation Routing
+
+The context automatically handles navigation based on notification data:
+
+\`\`\`typescript
+// When user taps notification, automatically navigates to:
+router.push({
+  pathname: data.route, // '/call-screen', '/chat', etc.
+  params: {
+    chatId: data.chatId,
+    callType: data.callType,
+    caller: JSON.stringify(data.caller)
+  }
+});
+\`\`\`
+
+---
+
+## 🛠️ Troubleshooting
+
+**Common Issues:**
+
+1. **"Must use physical device" Error**
+   - Push notifications don't work in iOS Simulator
+   - Use Expo Go on physical device or create development build
+
+2. **No Push Token Generated**
+   - Check EAS project ID in app config
+   - Verify permissions are granted
+   - Ensure running on physical device
+
+3. **Notifications Not Received**
+   - Check token is valid and not expired
+   - Verify Expo push service status
+   - Test with Expo Push Tool: https://expo.io/notifications
+
+4. **Firebase Integration Issues**
+   - Ensure user is authenticated before saving token
+   - Check Firestore security rules allow token updates
+   - Verify Firebase project configuration
+
+---
+
+## 🧪 Testing Push Notifications
+
+### Using Expo Push Tool
+1. Go to https://expo.io/notifications
+2. Enter your push token
+3. Add title, message, and JSON data
+4. Send test notification
+
+### Programmatic Testing
+\`\`\`typescript
+// Test component
+const TestNotifications = () => {
+  const { expoPushToken, scheduleNotification } = useNotification();
+
+  const sendTestNotification = async () => {
+    if (expoPushToken) {
+      await scheduleNotification(
+        expoPushToken,
+        '🧪 Test Notification',
+        'This is a test from your app!',
+        { type: 'test', timestamp: Date.now() }
+      );
+    }
+  };
+
+  return (
+    <Button title="Send Test" onPress={sendTestNotification} />
+  );
+};
+\`\`\`
+
+---
+
+## 📚 Additional Resources
+
+- [Expo Notifications Documentation](https://docs.expo.dev/versions/latest/sdk/notifications/)
+- [Push Notification Setup Guide](https://docs.expo.dev/push-notifications/overview/)
+- [Expo Push Tool](https://expo.io/notifications)
+- [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)
+- [EAS Build Setup](https://docs.expo.dev/build/introduction/)`,
+        configuration: `# Environment Configuration for Push Notifications
+
+# Expo EAS Configuration (required)
+EXPO_PUBLIC_EAS_PROJECT_ID=your-eas-project-id
+
+# Firebase Configuration (for token storage)
+EXPO_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
+EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+EXPO_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
+
+# App Configuration
+EXPO_PUBLIC_APP_NAME=Your App Name
+EXPO_PUBLIC_NOTIFICATION_ICON=./assets/notification-icon.png
+
+# Development Settings
+EXPO_PUBLIC_ENABLE_NOTIFICATION_LOGS=true
+EXPO_PUBLIC_AUTO_NAVIGATE_ON_NOTIFICATION=true
+
+# Production Settings (optional)
+EXPO_PUBLIC_NOTIFICATION_SOUND=default
+EXPO_PUBLIC_VIBRATION_PATTERN=[0,250,250,250]`
+      }
     ],
   }),
 });

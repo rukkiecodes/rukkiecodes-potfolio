@@ -17,17 +17,15 @@
       <v-col cols="12" md="6">
         <v-row class="mt-4">
           <v-col cols="12">
-            <p>Installation</p>
             <CodeBlock
               lang="shell"
               :code="recipe?.installation"
               theme="vs-dark"
-              height="220px"
+              height="250px"
             />
           </v-col>
 
           <v-col cols="12">
-            <p>📂 firebase.ts</p>
             <CodeBlock
               lang="shell"
               :code="recipe?.code"
@@ -37,7 +35,6 @@
           </v-col>
 
           <v-col cols="12">
-            <p>🚀 Example Usage</p>
             <CodeBlock
               lang="shell"
               :code="recipe?.usage"
@@ -47,7 +44,6 @@
           </v-col>
 
           <v-col cols="12">
-            <p>⚙️ Configuration</p>
             <CodeBlock
               lang="shell"
               :code="recipe?.configuration"

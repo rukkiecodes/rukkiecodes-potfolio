@@ -4,18 +4,24 @@
       <v-col cols="12">
         <v-card rounded="lg" class="pa-0 ma-0" color="transparent" flat>
           <p class="font-weight-bold text-h5 text-sm-h4 text-md-h3 text-lg-h2">
-            Rukkiecodes Dev Pantry
+            Welcome to my Kitchen
           </p>
           <p class="font-weight-bold text-body-1 text-sm-h6 text-indigo-accent-4 mb-10">
-            Stocked with my favorite code recipes, fresh, fast, and always ready to spoon.
-            <br>
-            Stirring up snippets I use daily. Grab a spoonful of copy-paste brilliance.
+            the place where I keep my favorite code recipes.
+
+            <p class="text-grey-lighten-1 text-body-2">
+              <br>
+              Just like a real kitchen, it’s stocked with ingredients I reach for often: reusable snippets, tested patterns, and little tricks that save me from reinventing the wheel.
+              <br>
+              <br>
+              Some recipes are spicy 🌶, some are sweet 🍭, but they all have one thing in common: they work.
+              This isn’t just for me. If you find something useful, grab a plate, copy it, and enjoy. After all, good food (and good code) is best when shared.
+              <br>
+              <br>
+              Pull up a chair, grab a spoon, and dig in. 🚀
+            </p>
           </p>
         </v-card>
-      </v-col>
-
-      <v-col cols="12">
-        <v-img max-height="550" :src="projectData?.banner" rounded="lg"/>
       </v-col>
     </v-row>
 
