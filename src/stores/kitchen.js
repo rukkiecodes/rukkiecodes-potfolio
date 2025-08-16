@@ -1063,6 +1063,1099 @@ Give it a file path → Get back an upload-ready blob. Simple!`,
 # - Videos: .mp4, .mov, .avi
 # - Documents: .pdf, .doc, .txt
 # - Any file type your app supports`
+      },
+
+      // Add this as item #5 in your kitchenList array
+      {
+        id: 4,
+        height: 100,
+        name: "Distance Calculator Between Two Users",
+        description: "Calculate the approximate distance between two users using their GPS coordinates. Works with Expo Location to show distance in meters or kilometers with proper formatting.",
+        installation: `# Install Expo Location for GPS coordinates
+npx expo install expo-location
+
+# No other packages needed - uses built-in Math functions`,
+        code: `// utils/distance.ts
+/**
+ * Calculate distance between two GPS coordinates
+ * Uses Haversine formula for accurate Earth distance calculation
+ */
+
+/**
+ * Get distance between two coordinates in kilometers
+ * @param lat1 - First location latitude
+ * @param lon1 - First location longitude
+ * @param lat2 - Second location latitude
+ * @param lon2 - Second location longitude
+ * @returns Distance in kilometers
+ */
+export function getDistanceFromLatLonInKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371; // Radius of Earth in km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(deg2rad(lat1)) *
+    Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in km
+}
+
+/**
+ * Convert degrees to radians
+ * @param deg - Degrees to convert
+ * @returns Radians
+ */
+function deg2rad(deg: number): number {
+  return deg * (Math.PI / 180);
+}
+
+/**
+ * Format distance with proper units (meters or kilometers)
+ * @param lat1 - First location latitude
+ * @param lon1 - First location longitude
+ * @param lat2 - Second location latitude
+ * @param lon2 - Second location longitude
+ * @returns Formatted distance string (e.g., "500 m" or "2.5 km")
+ */
+export function formatDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): string {
+  const distanceInKm = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+  if (distanceInKm < 1) {
+    const meters = distanceInKm * 1000;
+    return \`\${meters.toFixed(0)} m\`;
+  }
+  return \`\${distanceInKm.toFixed(2)} km\`;
+}`,
+        usage: `// How to use distance calculator
+import * as Location from 'expo-location';
+import { getDistanceFromLatLonInKm, formatDistance } from './utils/distance';
+
+// Basic distance calculation
+const calculateDistance = () => {
+  // Example coordinates (Lagos, Nigeria)
+  const user1Lat = 6.5244;
+  const user1Lon = 3.3792;
+
+  // Example coordinates (Abuja, Nigeria)
+  const user2Lat = 9.0579;
+  const user2Lon = 7.4951;
+
+  // Get distance in kilometers
+  const distanceKm = getDistanceFromLatLonInKm(user1Lat, user1Lon, user2Lat, user2Lon);
+  console.log('Distance:', distanceKm, 'km');
+
+  // Get formatted distance string
+  const formattedDistance = formatDistance(user1Lat, user1Lon, user2Lat, user2Lon);
+  console.log('Formatted:', formattedDistance); // "482.84 km"
+};
+
+// Real example with Expo Location
+const findNearbyUsers = async () => {
+  try {
+    // Get current user location
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Location permission denied');
+      return;
+    }
+
+    const currentLocation = await Location.getCurrentPositionAsync({});
+    const { latitude: myLat, longitude: myLon } = currentLocation.coords;
+
+    // Example: Check distance to other users
+    const otherUsers = [
+      { id: 1, name: 'John', lat: 6.5244, lon: 3.3792 },
+      { id: 2, name: 'Mary', lat: 6.4474, lon: 3.3903 },
+      { id: 3, name: 'David', lat: 6.6018, lon: 3.3515 }
+    ];
+
+    // Calculate distance to each user
+    otherUsers.forEach(user => {
+      const distance = formatDistance(myLat, myLon, user.lat, user.lon);
+      console.log(\`\${user.name} is \${distance} away\`);
+    });
+
+  } catch (error) {
+    console.log('Location error:', error);
+  }
+};
+
+// Filter users within certain distance
+const getNearbyUsers = (myLat, myLon, allUsers, maxDistanceKm = 5) => {
+  return allUsers.filter(user => {
+    const distance = getDistanceFromLatLonInKm(myLat, myLon, user.lat, user.lon);
+    return distance <= maxDistanceKm;
+  });
+};
+
+// Usage in a React component
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList } from 'react-native';
+
+const NearbyUsersScreen = () => {
+  const [nearbyUsers, setNearbyUsers] = useState([]);
+  const [myLocation, setMyLocation] = useState(null);
+
+  useEffect(() => {
+    getCurrentLocationAndFindUsers();
+  }, []);
+
+  const getCurrentLocationAndFindUsers = async () => {
+    const location = await Location.getCurrentPositionAsync({});
+    setMyLocation(location.coords);
+
+    // Your users from database
+    const allUsers = [
+      { id: 1, name: 'John', lat: 6.5244, lon: 3.3792 },
+      { id: 2, name: 'Mary', lat: 6.4474, lon: 3.3903 }
+    ];
+
+    // Find users within 10km
+    const nearby = getNearbyUsers(
+      location.coords.latitude,
+      location.coords.longitude,
+      allUsers,
+      10
+    );
+
+    setNearbyUsers(nearby);
+  };
+
+  const renderUser = ({ item }) => {
+    const distance = formatDistance(
+      myLocation.latitude,
+      myLocation.longitude,
+      item.lat,
+      item.lon
+    );
+
+    return (
+      <View style={{ padding: 10 }}>
+        <Text>{item.name}</Text>
+        <Text>{distance} away</Text>
+      </View>
+    );
+  };
+
+  return (
+    <View>
+      <Text>Nearby Users:</Text>
+      <FlatList
+        data={nearbyUsers}
+        renderItem={renderUser}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
+  );
+};`,
+        documentation: `# Distance Calculator Guide
+
+## What It Does
+
+Calculates the real-world distance between two GPS coordinates using the **Haversine formula**. Perfect for finding nearby users, delivery distances, or location-based features.
+
+## The Math Behind It
+
+- **Haversine formula** - Calculates distances on Earth's curved surface
+- **Earth radius** - Uses 6371 km (standard Earth radius)
+- **Accurate results** - Accounts for Earth's curvature, not straight-line distance
+
+## Functions Explained
+
+### \`getDistanceFromLatLonInKm()\`
+- Takes 4 numbers: lat1, lon1, lat2, lon2
+- Returns distance in kilometers (decimal number)
+- Example: \`25.847\` km
+
+### \`formatDistance()\`
+- Same inputs as above
+- Returns formatted string with units
+- Shows meters if under 1km: \`"750 m"\`
+- Shows kilometers if 1km+: \`"2.5 km"\`
+
+## How to Use
+
+### Step 1: Get user locations
+\`\`\`javascript
+// Get current user location
+const location = await Location.getCurrentPositionAsync({});
+const myLat = location.coords.latitude;
+const myLon = location.coords.longitude;
+\`\`\`
+
+### Step 2: Calculate distance
+\`\`\`javascript
+import { formatDistance } from './utils/distance';
+
+// Distance to another user
+const otherUserLat = 6.5244;
+const otherUserLon = 3.3792;
+
+const distance = formatDistance(myLat, myLon, otherUserLat, otherUserLon);
+console.log(\`User is \${distance} away\`); // "2.5 km away"
+\`\`\`
+
+### Step 3: Find nearby users
+\`\`\`javascript
+// Filter users within 5km
+const nearbyUsers = allUsers.filter(user => {
+  const distanceKm = getDistanceFromLatLonInKm(myLat, myLon, user.lat, user.lon);
+  return distanceKm <= 5; // Within 5km
+});
+\`\`\`
+
+## Common Use Cases
+
+- **Dating apps** - Show users within X km
+- **Delivery apps** - Calculate delivery distance
+- **Social apps** - Find nearby friends
+- **Marketplace** - Show local sellers
+- **Events** - Find events near you
+
+## Tips
+
+- Always request location permissions first
+- Handle location errors gracefully
+- Consider caching locations to avoid too many GPS calls
+- Add loading states while getting location
+
+## That's It!
+
+Give it two GPS coordinates → Get back the real distance between them!`,
+        configuration: `# Location permissions needed in app.json
+{
+  "expo": {
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "This app needs location to find nearby users."
+        }
+      ]
+    ]
+  }
+}
+
+# Usage settings
+MAX_NEARBY_DISTANCE_KM=10
+LOCATION_ACCURACY_LEVEL=6
+ENABLE_BACKGROUND_LOCATION=false
+
+# Distance display preferences
+SHOW_METERS_UNDER_1KM=true
+DECIMAL_PLACES_KM=2
+DECIMAL_PLACES_METERS=0`
+      },
+
+      {
+        id: 5,
+        height: 70,
+        name: "Responsive Size Normalizer",
+        description: "Simple function to make fonts, margins, and UI elements scale properly across all device screen sizes. Fixes React Native responsiveness issues.",
+        installation: `# No installation needed - uses built-in React Native
+import { Dimensions, PixelRatio } from 'react-native';`,
+        code: `// utils/responsive.js
+import { Dimensions, PixelRatio } from 'react-native';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const BASE_WIDTH = 375; // iPhone 6/7/8 width as base
+
+export const normalizeSize = (size: number) =>
+  Math.round(PixelRatio.roundToNearestPixel((SCREEN_WIDTH / BASE_WIDTH) * size));`,
+        usage: `// How to use normalizeSize
+import { normalizeSize } from './utils/responsive';
+
+// In your styles
+const styles = StyleSheet.create({
+  title: {
+    fontSize: normalizeSize(24), // Scales from 24px base
+    marginBottom: normalizeSize(16),
+  },
+  button: {
+    height: normalizeSize(50),
+    paddingHorizontal: normalizeSize(20),
+    borderRadius: normalizeSize(8),
+  },
+  avatar: {
+    width: normalizeSize(60),
+    height: normalizeSize(60),
+  }
+});
+
+// Direct usage
+<Text style={{ fontSize: normalizeSize(18) }}>Hello</Text>
+<View style={{ padding: normalizeSize(12) }}>Content</View>
+<Image style={{ width: normalizeSize(100), height: normalizeSize(100) }} />`,
+        documentation: `# Responsive Size Normalizer
+
+## What It Does
+Makes your app look the same on all devices by scaling sizes based on screen width.
+
+## How It Works
+- **Base width**: 375px (iPhone 6/7/8)
+- **Scaling**: Bigger screens = bigger sizes, smaller screens = smaller sizes
+- **Pixel perfect**: Rounds to nearest pixel for crisp display
+
+## Before vs After
+**Without normalizeSize:**
+- Small phones: Text too big
+- Large phones: Text too small
+- Tablets: Everything tiny
+
+**With normalizeSize:**
+- All devices: Perfect proportions
+
+## Usage
+Replace any size number with \`normalizeSize(number)\`:
+- \`fontSize: 16\` → \`fontSize: normalizeSize(16)\`
+- \`padding: 20\` → \`padding: normalizeSize(20)\`
+- \`width: 100\` → \`width: normalizeSize(100)\`
+
+That's it! Your app now works on all devices.`,
+        configuration: `# Base width options (choose one):
+const BASE_WIDTH = 375; // iPhone 6/7/8 (recommended)
+const BASE_WIDTH = 390; // iPhone 12/13/14
+const BASE_WIDTH = 414; // iPhone Plus models
+const BASE_WIDTH = 360; // Most Android phones`
+      },
+
+      {
+        id: 6,
+        height: 70,
+        name: "Font Size Normalizer",
+        description: "Smart function to make text sizes perfect on all devices. Uses both width and height to scale fonts consistently across phones and tablets.",
+        installation: `# No installation needed - uses built-in React Native
+import { Dimensions, PixelRatio } from "react-native";`,
+        code: `// utils/fontNormalizer.js
+import { Dimensions, PixelRatio } from "react-native";
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const BASE_WIDTH = 375;  // iPhone 6/7/8 width
+const BASE_HEIGHT = 812; // iPhone X height
+
+export const normalizeFontSize = (size: number) => {
+  const scaleWidth = SCREEN_WIDTH / BASE_WIDTH;
+  const scaleHeight = SCREEN_HEIGHT / BASE_HEIGHT;
+  // Use the smaller scale for consistent results
+  const scale = Math.min(scaleWidth, scaleHeight);
+  const newSize = (size * scale) / 1.5;
+  return Math.round(PixelRatio.roundToNearestPixel(newSize));
+};`,
+        usage: `// How to use normalizeFontSize
+import { normalizeFontSize } from './utils/fontNormalizer';
+
+// In your styles
+const styles = StyleSheet.create({
+  title: {
+    fontSize: normalizeFontSize(28),
+  },
+  subtitle: {
+    fontSize: normalizeFontSize(18),
+  },
+  body: {
+    fontSize: normalizeFontSize(16),
+  },
+  caption: {
+    fontSize: normalizeFontSize(12),
+  }
+});
+
+// Direct usage
+<Text style={{ fontSize: normalizeFontSize(20) }}>Hello World</Text>
+<Text style={{ fontSize: normalizeFontSize(14) }}>Description text</Text>
+
+// Common font sizes
+const FONT_SIZES = {
+  small: normalizeFontSize(12),
+  medium: normalizeFontSize(16),
+  large: normalizeFontSize(20),
+  xlarge: normalizeFontSize(24),
+  title: normalizeFontSize(28),
+};
+
+// Use predefined sizes
+<Text style={{ fontSize: FONT_SIZES.title }}>My Title</Text>`,
+        documentation: `# Font Size Normalizer
+
+## What It Does
+Makes text look perfect on all devices - no more tiny text on tablets or huge text on small phones.
+
+## How It's Smart
+- **Width + Height**: Considers both screen dimensions
+- **Smaller scale**: Uses the smaller scale for consistency
+- **Divided by 1.5**: Prevents text from being too big
+- **Pixel perfect**: Rounds to crisp pixels
+
+## Why Better Than Regular Normalizer
+Regular normalizer only uses width. This uses both width AND height, so text looks good on:
+- Small phones (iPhone SE)
+- Regular phones (iPhone 6-14)
+- Large phones (iPhone Plus)
+- Tablets (iPad)
+
+## Quick Setup
+Replace \`fontSize: 16\` with \`fontSize: normalizeFontSize(16)\` everywhere.
+
+Done! Perfect text on all devices.`,
+        configuration: `# Base device settings:
+const BASE_WIDTH = 375;  // iPhone 6/7/8
+const BASE_HEIGHT = 812; // iPhone X
+
+# Font scale factor:
+const SCALE_FACTOR = 1.5; // Makes fonts smaller (increase for bigger fonts)`
+      },
+
+      {
+        id: 7,
+        height: 150,
+        name: "ThemedText Component",
+        description: "Custom Text component with built-in theme support, Poppins fonts, and responsive sizing. Handles light/dark modes automatically and includes preset text styles.",
+        installation: `# Install required packages
+npx expo install expo-font
+npm install @expo/vector-icons
+
+# Download Poppins fonts from Google Fonts or use the provided link
+# Place fonts in: assets/fonts/Poppins/`,
+        code: `// components/ThemedText.tsx
+import { Text, type TextProps, StyleSheet } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { useFonts } from 'expo-font';
+import { normalizeFontSize } from '@/libraries/normalizeFontSize';
+
+export type ThemedTextProps = TextProps & {
+  lightColor?: string;
+  darkColor?: string;
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'caption' | 'body';
+  font?: 'Poppins-Black' | 'Poppins-Bold' | 'Poppins-Medium' | 'Poppins-Regular' | 'Poppins-SemiBold' | 'Poppins-Light';
+  opacity?: number;
+};
+
+export function ThemedText({
+  style,
+  lightColor,
+  darkColor,
+  type = 'default',
+  font,
+  opacity = 1,
+  ...rest
+}: ThemedTextProps) {
+  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+
+  const [loaded] = useFonts({
+    'Poppins-Black': require('@/assets/fonts/Poppins/Poppins-Black.ttf'),
+    'Poppins-Bold': require('@/assets/fonts/Poppins/Poppins-Bold.ttf'),
+    'Poppins-Medium': require('@/assets/fonts/Poppins/Poppins-Medium.ttf'),
+    'Poppins-Regular': require('@/assets/fonts/Poppins/Poppins-Regular.ttf'),
+    'Poppins-SemiBold': require('@/assets/fonts/Poppins/Poppins-SemiBold.ttf'),
+    'Poppins-Light': require('@/assets/fonts/Poppins/Poppins-Light.ttf'),
+  });
+
+  if (!loaded) return null;
+
+  return (
+    <Text
+      allowFontScaling={false}
+      style={[
+        { color },
+        styles[type],
+        style,
+        { fontFamily: font || 'Poppins-Regular', opacity }
+      ]}
+      {...rest}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
+  default: {
+    fontSize: normalizeFontSize(16),
+  },
+  defaultSemiBold: {
+    fontSize: normalizeFontSize(16),
+  },
+  title: {
+    fontSize: normalizeFontSize(32),
+  },
+  subtitle: {
+    fontSize: normalizeFontSize(20),
+  },
+  link: {
+    lineHeight: normalizeFontSize(30),
+    fontSize: normalizeFontSize(16),
+  },
+  body: {
+    fontSize: normalizeFontSize(14),
+  },
+  caption: {
+    fontSize: normalizeFontSize(12),
+  },
+});`,
+        usage: `// Basic usage
+import { ThemedText } from '@/components/ThemedText';
+
+// Different text types
+<ThemedText type="title">Main Title</ThemedText>
+<ThemedText type="subtitle">Subtitle Text</ThemedText>
+<ThemedText type="body">Body content</ThemedText>
+<ThemedText type="caption">Small caption</ThemedText>
+
+// Custom fonts
+<ThemedText font="Poppins-Bold">Bold Text</ThemedText>
+<ThemedText font="Poppins-Light">Light Text</ThemedText>
+
+// Theme colors
+<ThemedText lightColor="#000" darkColor="#fff">Auto theme</ThemedText>
+
+// With opacity
+<ThemedText opacity={0.7}>Faded text</ThemedText>
+
+// Combined usage
+<ThemedText
+  type="title"
+  font="Poppins-Bold"
+  lightColor="#333"
+  darkColor="#fff"
+>
+  My App Title
+</ThemedText>`,
+        documentation: `# ThemedText Component
+
+## What It Does
+Smart Text component that automatically handles:
+- **Theme colors** (light/dark mode)
+- **Poppins fonts** (professional look)
+- **Responsive sizing** (works on all devices)
+- **Preset styles** (title, body, caption, etc.)
+
+## Features
+- Auto theme switching
+- Custom font weights
+- Responsive text sizes
+- Prevents font scaling issues
+
+## Text Types
+- \`title\` - Large headers (32px)
+- \`subtitle\` - Section headers (20px)
+- \`default\` - Normal text (16px)
+- \`body\` - Content text (14px)
+- \`caption\` - Small text (12px)
+
+## Font Weights
+- \`Poppins-Light\` - Thin text
+- \`Poppins-Regular\` - Normal (default)
+- \`Poppins-Medium\` - Medium weight
+- \`Poppins-SemiBold\` - Semi bold
+- \`Poppins-Bold\` - Bold text
+- \`Poppins-Black\` - Extra bold
+
+## Download Fonts
+Get Poppins fonts here: https://drive.google.com/drive/folders/1pwQGwgbP_Pdq0aXGLBy_F2QQ8yaaIt_H
+
+Place in: \`assets/fonts/Poppins/\`
+
+Replace all \`<Text>\` with \`<ThemedText>\` for consistent styling!`,
+        configuration: `# Font folder structure:
+assets/
+  fonts/
+    Poppins/
+      Poppins-Black.ttf
+      Poppins-Bold.ttf
+      Poppins-Medium.ttf
+      Poppins-Regular.ttf
+      Poppins-SemiBold.ttf
+      Poppins-Light.ttf
+
+# Theme colors (in your theme file):
+text: {
+  light: '#000000',
+  dark: '#FFFFFF'
+}`
+      },
+
+      // Add this as item #9 in your kitchenList array
+      {
+        id: 8,
+        height: 70,
+        name: "CustomImage Component",
+        description: "Responsive Image component that keeps image sizes consistent across all devices. Uses screen width percentage for automatic scaling with smooth transitions and placeholders.",
+        installation: `# Install expo-image for better performance
+npx expo install expo-image`,
+        code: `// components/CustomImage.js
+import { Dimensions, ImageStyle, StyleProp } from 'react-native';
+import React from 'react';
+import { Image } from 'expo-image';
+
+const { width: screenWidth } = Dimensions.get('window');
+
+interface ImageProps {
+  source?: string;
+  placeholder?: string;
+  contentFit?: string | any;
+  placeholderContentFit?: string | any;
+  transition?: number;
+  size?: number;
+  style?: StyleProp<ImageStyle>;
+}
+
+export default function CustomImage({
+  source,
+  placeholder,
+  contentFit = 'cover',
+  placeholderContentFit = 'cover',
+  transition = 300,
+  size = 1,
+  style,
+  ...res
+}: ImageProps) {
+  const imageSize = screenWidth * size;
+
+  return (
+    <Image
+      source={source}
+      placeholder={placeholder}
+      contentFit={contentFit}
+      placeholderContentFit={placeholderContentFit}
+      transition={transition || 500}
+      style={[
+        { width: imageSize, height: imageSize },
+        style
+      ]}
+      {...res}
+    />
+  );
+}`,
+        usage: `// How to use CustomImage
+import CustomImage from '@/components/CustomImage';
+
+// Full screen width image
+<CustomImage source="https://example.com/image.jpg" />
+
+// Half screen width
+<CustomImage source="https://example.com/image.jpg" size={0.5} />
+
+// Quarter screen width
+<CustomImage source="https://example.com/image.jpg" size={0.25} />
+
+// With placeholder
+<CustomImage
+  source="https://example.com/image.jpg"
+  placeholder="https://via.placeholder.com/300"
+/>
+
+// Different content fit
+<CustomImage
+  source="https://example.com/image.jpg"
+  contentFit="contain"
+  size={0.8}
+/>
+
+// Custom styling
+<CustomImage
+  source="https://example.com/image.jpg"
+  size={0.6}
+  style={{ borderRadius: 20, marginBottom: 10 }}
+/>
+
+// Profile pictures
+<CustomImage
+  source={user.avatar}
+  size={0.3}
+  style={{ borderRadius: 999 }}
+/>
+
+// Image grid
+<View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+  <CustomImage source="image1.jpg" size={0.48} />
+  <CustomImage source="image2.jpg" size={0.48} />
+  <CustomImage source="image3.jpg" size={0.48} />
+  <CustomImage source="image4.jpg" size={0.48} />
+</View>`,
+        documentation: `# CustomImage Component
+
+## What It Does
+Makes images scale perfectly on all devices using screen width percentage instead of fixed pixels.
+
+## Key Features
+- **Responsive sizing** - Uses screen width percentage
+- **Consistent squares** - Width and height are equal
+- **Smooth transitions** - Fade-in effect when loading
+- **Placeholder support** - Shows placeholder while loading
+- **Expo Image** - Better performance than regular Image
+
+## Size Guide
+- \`size={1}\` - Full screen width
+- \`size={0.5}\` - Half screen width
+- \`size={0.3}\` - 30% of screen width
+- \`size={0.25}\` - Quarter screen width
+
+## Content Fit Options
+- \`cover\` - Fill the space (default)
+- \`contain\` - Fit inside without cropping
+- \`fill\` - Stretch to fill
+- \`scale-down\` - Scale down if needed
+
+## Perfect For
+- Profile pictures
+- Product images
+- Image galleries
+- Social media posts
+- Consistent UI layouts
+
+Replace regular \`<Image>\` with \`<CustomImage>\` for automatic responsiveness!`,
+        configuration: `# Common size presets you can define:
+const IMAGE_SIZES = {
+  thumbnail: 0.15,    // Small thumbnails
+  avatar: 0.25,       // Profile pictures
+  card: 0.4,          // Card images
+  hero: 0.8,          // Hero images
+  full: 1,            // Full width
+};
+
+# Usage with presets:
+<CustomImage size={IMAGE_SIZES.avatar} />`
+      },
+
+      // Add this as item #10 in your kitchenList array
+      {
+        id: 9,
+        height: 100,
+        name: "LoadingScreen Component",
+        description: "Beautiful animated loading screen with spinning circles. Uses React Native Reanimated for smooth performance and responsive sizing.",
+        installation: `# Install React Native Reanimated
+npx expo install react-native-reanimated`,
+        code: `// components/LoadingScreen.js
+import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { ThemedView } from './ThemedView';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  Easing,
+} from 'react-native-reanimated';
+import { normalizeSize } from '@/libraries/normalize';
+
+const CIRCLES = 3;
+
+export default function LoadingScreen({ text }) {
+  const rotations = Array.from({ length: CIRCLES }, () => useSharedValue(0));
+
+  useEffect(() => {
+    rotations.forEach((rotation, index) => {
+      rotation.value = withRepeat(
+        withTiming(360, {
+          duration: 3000 + index * 300,
+          easing: Easing.linear,
+        }),
+        -1,
+        false
+      );
+    });
+  }, []);
+
+  return (
+    <ThemedView style={styles.container}>
+      {rotations.map((rotation, index) => {
+        const size = normalizeSize(50) + index * normalizeSize(20);
+        const clockwise = index % 2 === 0;
+        const animatedStyle = useAnimatedStyle(() => {
+          return {
+            transform: [
+              {
+                rotate: \`\${clockwise ? rotation.value : -rotation.value}deg\`,
+              },
+            ],
+          };
+        });
+        const opacity = 1 - index * 0.3;
+        const strokeType = index % 2 === 0 ? 'dashed' : 'dotted';
+        const borderWidth = normalizeSize(1.5) - index * 0.3;
+
+        return (
+          <Animated.View
+            key={index}
+            style={[
+              styles.circle,
+              animatedStyle,
+              {
+                width: size,
+                height: size,
+                borderColor: \`rgba(91, 60, 244, \${opacity})\`,
+                borderStyle: strokeType,
+                borderWidth,
+              },
+            ]}
+          />
+        );
+      })}
+    </ThemedView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circle: {
+    position: 'absolute',
+    borderRadius: 999,
+  },
+});`,
+        usage: `// Basic usage
+import LoadingScreen from '@/components/LoadingScreen';
+
+// Show loading screen
+const MyScreen = () => {
+  const [loading, setLoading] = useState(true);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return <YourMainContent />;
+};
+
+// With conditional rendering
+{isLoading && <LoadingScreen />}
+
+// In navigation screens
+const HomeScreen = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetchData().then(setData);
+  }, []);
+
+  if (!data) return <LoadingScreen />;
+
+  return <YourContent data={data} />;
+};`,
+        documentation: `# LoadingScreen Component
+
+## What It Does
+Shows a beautiful spinning animation while your app loads data, screens, or performs tasks.
+
+## Features
+- **3 spinning circles** - Different sizes and speeds
+- **Smooth animation** - Uses Reanimated for 60fps
+- **Responsive sizing** - Works on all devices
+- **Alternating rotation** - Some spin left, some right
+- **Fading opacity** - Outer circles are more transparent
+- **Mixed borders** - Dashed and dotted styles
+
+## Animation Details
+- **Duration**: 3-4 seconds per rotation
+- **Direction**: Alternates clockwise/counterclockwise
+- **Easing**: Linear for consistent speed
+- **Infinite**: Loops forever until unmounted
+
+## Perfect For
+- App startup loading
+- Data fetching screens
+- Image upload progress
+- Screen transitions
+- API call waiting
+
+Replace boring loading text with this smooth animated loader!`,
+        configuration: `# Customize the loader:
+const CIRCLES = 3;           // Number of circles
+const BASE_SIZE = 50;        // Smallest circle size
+const SIZE_INCREMENT = 20;   // Size difference between circles
+const BASE_DURATION = 3000;  // Animation speed (ms)
+const COLOR = 'rgba(91, 60, 244, 1)'; // Circle color`
+      },
+
+      // Add this as item #11 in your kitchenList array
+      {
+        id: 10,
+        height: 100,
+        name: "Authentication Provider",
+        description: "Complete authentication context for managing user login state with Firebase Auth, Redux integration, and automatic navigation routing.",
+        installation: `# Install required packages
+npm install firebase
+npx expo install expo-router
+npm install @reduxjs/toolkit react-redux`,
+        code: `// providers/AuthenticationProvider.js
+import { createContext, ReactNode, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { User } from "@/store/types/types";
+import { auth, setupAuthStatePersistence } from '@/utils/firebase';
+import { router } from "expo-router";
+import { signOut as firebaseSignOut } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/slices/userSlice';
+import LoadingScreen from '@/components/LoadingScreen';
+
+interface AuthContextType {
+    user: User | null;
+    signIn: () => void;
+    signOut: () => void;
+}
+
+const AuthContext = createContext<AuthContextType | any>(null);
+
+export const useAuth = (): AuthContextType | null => {
+    return useContext(AuthContext);
+};
+
+interface AuthenticationProviderProps {
+    children: ReactNode;
+}
+
+const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
+    const [authState, setAuthState] = useState(false);
+
+    const initializeAuth = async () => {
+        const unsubscribe = setupAuthStatePersistence(firebaseUser => {
+            if (firebaseUser) {
+                setAuthState(true);
+                dispatch(setUser(firebaseUser));
+            } else {
+                setAuthState(false);
+                dispatch(setUser(null));
+            }
+            setLoading(false);
+        });
+        return unsubscribe;
+    };
+
+    useLayoutEffect(() => {
+        initializeAuth();
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!loading) {
+            if (!authState) router.replace("/(auth)/home");
+            else router.replace('/(app)/(tabs)/home');
+        }
+    }, [loading, authState, auth]);
+
+    if (loading) return <LoadingScreen />;
+
+    const signIn = () => setAuthState(true);
+
+    const signOut = async (): Promise<void> => {
+        try {
+            await firebaseSignOut(auth);
+            setAuthState(false);
+            router.replace("/(auth)/home");
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    return (
+        <AuthContext.Provider value={{ authState, signIn, signOut }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+export default AuthenticationProvider;`,
+        usage: `// How to use Authentication Provider
+// 1. Wrap your app in the provider
+import AuthenticationProvider from '@/providers/AuthenticationProvider';
+
+// In your _layout.tsx or App.tsx
+export default function RootLayout() {
+  return (
+    <Provider store={store}>
+      <AuthenticationProvider>
+        <Stack />
+      </AuthenticationProvider>
+    </Provider>
+  );
+}
+
+// 2. Use auth in any component
+import { useAuth } from '@/providers/AuthenticationProvider';
+
+const MyComponent = () => {
+  const { authState, signIn, signOut } = useAuth();
+
+  if (!authState) {
+    return (
+      <Button title="Sign In" onPress={signIn} />
+    );
+  }
+
+  return (
+    <View>
+      <Text>Welcome, you're logged in!</Text>
+      <Button title="Sign Out" onPress={signOut} />
+    </View>
+  );
+};
+
+// 3. Protected screens
+const ProtectedScreen = () => {
+  const { authState } = useAuth();
+
+  if (!authState) {
+    return <Text>Please log in</Text>;
+  }
+
+  return <YourProtectedContent />;
+};`,
+        documentation: `# Authentication Provider
+
+## What It Does
+Manages user authentication state across your entire app with automatic navigation and state persistence.
+
+## Features
+- **Firebase Auth** - Secure authentication
+- **Redux Integration** - Syncs with global state
+- **Auto Navigation** - Routes users automatically
+- **State Persistence** - Remembers login status
+- **Loading Screen** - Shows loader during auth check
+- **Context API** - Easy access anywhere in app
+
+## How It Works
+1. **Initialization** - Checks if user is already logged in
+2. **State Management** - Updates Redux store with user data
+3. **Auto Routing** - Navigates to correct screen based on auth state
+4. **Persistence** - Maintains login across app restarts
+
+## Navigation Flow
+- **Not logged in** → Routes to \`/(auth)/home\`
+- **Logged in** → Routes to \`/(app)/(tabs)/home\`
+- **Loading** → Shows loading screen
+
+## Methods
+- \`signIn()\` - Sets user as authenticated
+- \`signOut()\` - Logs out user and redirects
+- \`authState\` - Boolean indicating if user is logged in
+
+Wrap your app once, use authentication everywhere!`,
+        configuration: `# Required folder structure:
+app/
+  (auth)/
+    home.tsx          # Login/signup screen
+  (app)/
+    (tabs)/
+      home.tsx        # Main app home
+
+# Firebase setup needed:
+utils/
+  firebase.ts         # Firebase config
+store/
+  slices/
+    userSlice.ts      # Redux user slice`
       }
     ],
   }),
