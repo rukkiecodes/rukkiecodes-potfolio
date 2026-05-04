@@ -1,0 +1,295 @@
+.work-section {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+  pointer-events: none;
+  color: #f5f3ff;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* real liquid-glass: native backdrop blur over the hero behind */
+  background: rgba(7, 7, 15, 0.45);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+}
+
+.work-section__canvas {
+  position: absolute !important;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* nav at top-center, mirrors the hero nav links — driven by scroll.
+   Centering & initial offset are applied via GSAP (xPercent + y) so we
+   keep CSS free of the translate that GSAP can't decompose cleanly. */
+.work-section__nav {
+  position: absolute;
+  top: 1.7rem;
+  left: 50%;
+  opacity: 0;
+  z-index: 4;
+  display: flex;
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+
+.work-section__nav a {
+  color: #d8d4e0;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+.work-section__nav a:hover { color: #fff; }
+.work-section__nav sup {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.7em;
+  margin-left: 2px;
+}
+
+.work-section__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 5;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 243, 255, 0.16);
+  background: rgba(245, 243, 255, 0.04);
+  color: #f5f3ff;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.work-section__close:hover {
+  background: rgba(245, 243, 255, 0.1);
+  border-color: rgba(245, 243, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+/* ===== right 60% column — title at top, project card below ===== */
+.work-section__main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 4.5vh 4vw 4vh 0;
+  gap: 2.5vh;
+  z-index: 2;
+}
+
+.work-section__intro {
+  flex-shrink: 0;
+}
+
+.work-section__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 255, 0.5);
+  margin-bottom: 0.6rem;
+}
+
+.work-section__title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #f5f3ff;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.work-section__copy {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(245, 243, 255, 0.65);
+}
+
+/* ===== project card — vertical stack: banner on top, body below ===== */
+.project-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.project-card__media {
+  position: relative;
+  flex: 0 0 auto;
+  height: 38vh;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(245, 243, 255, 0.08);
+  background: rgba(245, 243, 255, 0.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.project-card__banner {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.9s ease, transform 5s ease;
+}
+.project-card__banner.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.project-card__dots {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.4rem;
+  z-index: 2;
+}
+.project-card__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, width 0.3s;
+}
+.project-card__dot.is-active {
+  background: #fff;
+  width: 18px;
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.project-card__eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 255, 0.5);
+  margin-bottom: 0.55rem;
+}
+
+.project-card__title {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f5f3ff;
+}
+
+.project-card__copy {
+  margin: 0 0 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(245, 243, 255, 0.72);
+}
+
+.project-card__cta {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 0.78rem 1.4rem;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #07070F;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+.project-card__cta:hover {
+  transform: translateY(-1px);
+  background: #f0eef5;
+}
+
+/* fade-in when switching projects (key prop forces a remount) */
+.project-card {
+  animation: projectFadeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes projectFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* prev / next project nav */
+.project-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.75rem;
+}
+
+.project-nav__indicator {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: rgba(245, 243, 255, 0.45);
+}
+
+.project-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 243, 255, 0.16);
+  background: rgba(245, 243, 255, 0.04);
+  color: #f5f3ff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.project-nav__btn:hover {
+  background: rgba(245, 243, 255, 0.1);
+  border-color: rgba(245, 243, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ===== responsive ===== */
+@media (max-width: 900px) {
+  .work-section__main {
+    width: 100vw;
+    padding: 4vh 5vw;
+  }
+  .project-card__media { height: 30vh; }
+}

@@ -1,0 +1,203 @@
+.experience-section {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 12;
+  color: #f5f3ff;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(7, 7, 15, 0.5);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+.experience-section__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 5;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 243, 255, 0.16);
+  background: rgba(245, 243, 255, 0.04);
+  color: #f5f3ff;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.experience-section__close:hover {
+  background: rgba(245, 243, 255, 0.1);
+  border-color: rgba(245, 243, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.experience-section__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5vh 5vw 4vh;
+  gap: 3vh;
+}
+
+.experience-section__intro {
+  flex-shrink: 0;
+  max-width: 38rem;
+}
+
+.experience-section__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 255, 0.5);
+  margin-bottom: 0.55rem;
+}
+
+.experience-section__title {
+  margin: 0 0 0.55rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.experience-section__copy {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(245, 243, 255, 0.65);
+}
+
+.experience-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 1.5rem;
+  min-height: 0;
+}
+
+.experience-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3.5rem;
+  min-height: 0;
+}
+
+.experience-portrait {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 0;
+}
+
+.experience-portrait img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+}
+
+.experience-card {
+  position: relative;
+  padding: 0;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-height: 0;
+  transition: opacity 0.2s;
+}
+
+.experience-card:hover {
+  /* subtle de-emphasis on the unhovered look — no longer translates */
+}
+
+.experience-card__period {
+  display: inline-block;
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(245, 243, 255, 0.45);
+  margin-bottom: 0.15rem;
+}
+
+.experience-card__role {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f5f3ff;
+  line-height: 1.2;
+}
+
+.experience-card__company {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: rgba(245, 243, 255, 0.55);
+  margin-bottom: 0.55rem;
+}
+
+.experience-card__bullets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.experience-card__bullets li {
+  position: relative;
+  padding-left: 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(245, 243, 255, 0.7);
+}
+
+.experience-card__bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.4rem;
+  height: 1px;
+  background: rgba(245, 243, 255, 0.4);
+}
+
+@media (max-width: 1100px) {
+  .experience-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .experience-portrait { display: none; }
+}
+
+@media (max-width: 700px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+    overflow-y: auto;
+  }
+}
