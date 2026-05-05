@@ -6,6 +6,7 @@ import {
   LinkedInIcon,
   XIcon,
 } from './SocialIcons'
+import { SectionNav } from './SectionNav'
 import './ContactSection.css'
 
 const EMAIL = 'rukkiecodes@gmail.com'
@@ -42,6 +43,8 @@ export function ContactSection() {
       className="contact-section"
       id="contact"
     >
+      <SectionNav active="contact" />
+
       <button
         className="contact-section__close"
         type="button"

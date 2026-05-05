@@ -8,11 +8,11 @@
   pointer-events: none;
   color: #f5f3ff;
   font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  /* real liquid-glass: native backdrop blur over the hero behind */
-  background: rgba(7, 7, 15, 0.45);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+  /* glass morphism — shared across all overlay sections */
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .work-section__canvas {
@@ -289,7 +289,17 @@
 @media (max-width: 900px) {
   .work-section__main {
     width: 100vw;
-    padding: 4vh 5vw;
+    height: 100vh;
+    padding: 7vh 5vw 4vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: auto;
   }
-  .project-card__media { height: 30vh; }
+  .project-card { flex: 0 0 auto; }
+  .project-card__media {
+    height: 30vh;
+    flex-shrink: 0;
+  }
+  .project-card__body { flex: 0 0 auto; }
+  .project-nav { margin-top: 1.5rem; }
 }

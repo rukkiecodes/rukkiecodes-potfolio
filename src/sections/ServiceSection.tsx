@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
 import { NoisySphere } from './NoisySphere'
+import { SectionNav } from './SectionNav'
 import './ServiceSection.css'
 
 interface Service {
@@ -86,6 +87,8 @@ export function ServiceSection() {
       className="service-section"
       id="services"
     >
+      <SectionNav active="service" />
+
       <button
         className="service-section__close"
         type="button"

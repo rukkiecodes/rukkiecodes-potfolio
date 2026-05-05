@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
+import { SectionNav } from './SectionNav'
 import './ExperienceSection.css'
 
 interface Experience {
@@ -86,6 +87,8 @@ export function ExperienceSection() {
       className="experience-section"
       id="experience"
     >
+      <SectionNav active="experience" />
+
       <button
         className="experience-section__close"
         type="button"

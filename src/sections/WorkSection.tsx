@@ -4,6 +4,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState } from 'react'
 import { NoisySphere } from './NoisySphere'
+import { SectionNav } from './SectionNav'
 import './WorkSection.css'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -74,6 +75,18 @@ export function WorkSection() {
     return () => window.clearInterval(id)
   }, [project])
 
+  useEffect(() => {
+    const onOpen = () => {
+      gsap.to(window, {
+        scrollTo: window.innerHeight,
+        duration: 1.4,
+        ease: 'power2.inOut',
+      })
+    }
+    window.addEventListener('open-work', onOpen)
+    return () => window.removeEventListener('open-work', onOpen)
+  }, [])
+
   const nextProject = () =>
     setProjectIdx((i) => (i + 1) % projects.length)
   const prevProject = () =>
@@ -93,7 +106,6 @@ export function WorkSection() {
       ],
       { xPercent: -100 },
     )
-    gsap.set('.work-section__nav', { xPercent: -50, y: -30, opacity: 0 })
 
     const setPE = (sel: string, active: boolean) => {
       const el = document.querySelector(sel) as HTMLElement | null
@@ -152,24 +164,6 @@ export function WorkSection() {
         .to('.experience-section', { xPercent: 0, duration: 0.25, ease: 'none' }, 0.50)
         .to('.contact-section',    { xPercent: 0, duration: 0.25, ease: 'none' }, 0.75)
 
-      // toggle the work-section's own nav links once the work panel is in
-      ScrollTrigger.create({
-        trigger: '.hero',
-        start: 'top top',
-        end:   '+=92%',
-        onLeave: () => {
-          gsap.to('.work-section__nav', {
-            xPercent: -50, opacity: 1, y: 0,
-            duration: 0.6, ease: 'power2.out',
-          })
-        },
-        onEnterBack: () => {
-          gsap.to('.work-section__nav', {
-            xPercent: -50, opacity: 0, y: -30,
-            duration: 0.4, ease: 'power2.in',
-          })
-        },
-      })
     })
 
     return () => ctx.revert()
@@ -186,42 +180,7 @@ export function WorkSection() {
         <NoisySphere position={[-1.35, 0, 0]} />
       </Canvas>
 
-      <ul className="work-section__nav">
-        <li><a href="#work">Work <sup>[14]</sup></a></li>
-        <li>
-          <a
-            href="#services"
-            onClick={(e) => {
-              e.preventDefault()
-              window.dispatchEvent(new CustomEvent('open-service'))
-            }}
-          >
-            Service <sup>[4]</sup>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#experience"
-            onClick={(e) => {
-              e.preventDefault()
-              window.dispatchEvent(new CustomEvent('open-experience'))
-            }}
-          >
-            Experience <sup>[5y+]</sup>
-          </a>
-        </li>
-        <li>
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              window.dispatchEvent(new CustomEvent('open-contact'))
-            }}
-          >
-            Contact
-          </a>
-        </li>
-      </ul>
+      <SectionNav active="work" />
 
       <button
         className="work-section__close"
