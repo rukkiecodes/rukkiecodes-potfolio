@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   z-index: 10;
   overflow: hidden;
   pointer-events: none;
@@ -82,7 +82,7 @@
   top: 0;
   right: 0;
   width: 50vw;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   padding: 4.5vh 4vw 4vh 0;
@@ -285,7 +285,7 @@
 @media (max-width: 900px) {
   .work-section__main {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     padding: 7vh 5vw 4vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
