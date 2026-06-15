@@ -24,3 +24,20 @@ body::-webkit-scrollbar,
 }
 
 * { box-sizing: border-box; }
+
+/* keyboard focus ring — :where() keeps specificity 0 so component styles still win */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid rgba(245, 243, 255, 0.55);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* respect users who prefer reduced motion — kills hover lifts + entrance anims site-wide */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

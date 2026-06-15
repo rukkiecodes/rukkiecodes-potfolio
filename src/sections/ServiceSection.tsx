@@ -1,64 +1,126 @@
-import { Canvas } from '@react-three/fiber'
 import gsap from 'gsap'
 import { useEffect, useRef } from 'react'
-import { NoisySphere } from './NoisySphere'
-import { SectionNav } from './SectionNav'
 import './ServiceSection.css'
+
+// TODO: replace with the real booking link once set up
+const CAL_URL = 'https://cal.com/rukkiecodes'
+const EMAIL = 'rukkiecodes@gmail.com'
+
+type IconKey = 'ai' | 'mobile' | 'web' | 'tools' | 'mentor'
 
 interface Service {
   n: string
   title: string
   copy: string
-  image?: string
-  imageAlt?: string
+  chips: string[]
+  icon: IconKey
 }
 
 const services: Service[] = [
   {
-    n:    '01',
-    title: 'Mobile App Development',
-    copy: 'Native iOS & Android plus cross-platform builds with React Native and Expo — performant apps that feel right on every device.',
-    image: '/service-mobile.jpg',
-    imageAlt: 'Code editor with React app',
+    n: '01',
+    title: 'AI-Powered Products',
+    icon: 'ai',
+    copy: 'Apps with real intelligence built in — LLM-driven assistants, in-browser/on-device AI, and chart-analysis tools that turn raw input into a clear, structured answer. Private when it needs to be, useful from the first click.',
+    chips: ['LLM tooling', 'On-device AI', 'Chrome extension'],
   },
   {
-    n:    '02',
-    title: 'Web Application Development',
-    copy: 'Full-stack web apps with React, Next.js, Node, and Firebase — auth, real-time data, payments, the works.',
-    image: '/service-webapp.jpg',
-    imageAlt: 'Team building a web app on MacBooks',
+    n: '02',
+    title: 'Cross-Platform Mobile',
+    icon: 'mobile',
+    copy: 'iOS and Android from one codebase with React Native and Expo — shipped, store-published apps that feel native, from telemedicine to verified attendance with offline sync.',
+    chips: ['React Native', 'Expo', 'Google Play'],
   },
   {
-    n:    '03',
-    title: 'Website Development',
-    copy: 'Marketing sites, portfolios, and content-driven experiences — fast, accessible, and search-engine friendly.',
-    image: '/service-website.jpg',
-    imageAlt: 'Developer at multi-monitor workstation',
+    n: '03',
+    title: 'Full-Stack Web Apps',
+    icon: 'web',
+    copy: 'Production web apps end to end with React, Next.js, Node, and Firebase — auth, real-time data (Socket.IO), REST/GraphQL APIs, and payments. Architecture through deployment, owned by one person.',
+    chips: ['React', 'Next.js', 'Node', 'Firebase'],
   },
   {
-    n:    '04',
-    title: 'Instructor',
-    copy: 'I teach the tools I work with. 1:1 mentoring, workshops, and curriculum design for teams and individuals.',
-    image: '/service-instructor.jpg',
-    imageAlt: 'Instructor with students in a classroom',
+    n: '04',
+    title: 'Extensions & Dev Tools',
+    icon: 'tools',
+    copy: 'Browser extensions and developer tooling that slot into real workflows — Chrome extensions, design systems, CLIs, and published npm packages. Tools other developers actually keep open.',
+    chips: ['Chrome extension', 'npm package', 'CLI tooling'],
+  },
+  {
+    n: '05',
+    title: 'Mentoring & Curriculum',
+    icon: 'mentor',
+    copy: 'For teams that want to level up: 1:1 mentoring, workshops, and curriculum across web, mobile, and backend — the same stack I ship with, taught hands-on.',
+    chips: ['Web', 'Mobile', 'Backend'],
   },
 ]
 
+function ServiceIcon({ icon }: { icon: IconKey }) {
+  const common = {
+    className: 'service-icon',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.6,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    'aria-hidden': true,
+    focusable: false,
+  }
+  switch (icon) {
+    case 'ai':
+      return (
+        <svg {...common}>
+          <path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z" />
+          <path d="M18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9L18 14z" />
+        </svg>
+      )
+    case 'mobile':
+      return (
+        <svg {...common}>
+          <rect x="7" y="3" width="10" height="18" rx="2" />
+          <path d="M11 18h2" />
+        </svg>
+      )
+    case 'web':
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="M3 9h18M7 7h.01M10 7h.01" />
+        </svg>
+      )
+    case 'tools':
+      return (
+        <svg {...common}>
+          <path d="M14 7a2 2 0 1 1 3 3l-1 1 3 3-3 3-3-3-1 1a2 2 0 1 1-3-3l1-1-3-3 3-3 3 3 1-1z" />
+        </svg>
+      )
+    case 'mentor':
+      return (
+        <svg {...common}>
+          <path d="M12 4l9 5-9 5-9-5 9-5z" />
+          <path d="M7 11.5V16c0 1 2.2 2.5 5 2.5s5-1.5 5-2.5v-4.5" />
+        </svg>
+      )
+  }
+}
+
 function ServiceCard({ s }: { s: Service }) {
   return (
-    <article className={`service-card${s.image ? ' service-card--has-image' : ''}`}>
-      {s.image && (
-        <img
-          className="service-card__image"
-          src={s.image}
-          alt={s.imageAlt ?? ''}
-          loading="lazy"
-        />
-      )}
-      <div className="service-card__body">
+    <article className="service-card">
+      <div className="service-card__head">
+        <span className="service-card__icon">
+          <ServiceIcon icon={s.icon} />
+        </span>
         <span className="service-card__num">{s.n}</span>
+      </div>
+      <div className="service-card__body">
         <h3 className="service-card__title">{s.title}</h3>
         <p className="service-card__copy">{s.copy}</p>
+        <ul className="service-card__chips">
+          {s.chips.map((c) => (
+            <li key={c} className="service-card__chip">{c}</li>
+          ))}
+        </ul>
       </div>
     </article>
   )
@@ -67,13 +129,12 @@ function ServiceCard({ s }: { s: Service }) {
 export function ServiceSection() {
   const sectionRef = useRef<HTMLElement>(null)
 
-  // open-service event scrolls to the section's snap position; the master
-  // scroll timeline (in WorkSection) handles the actual slide-in animation.
+  // open-service event smooth-scrolls down to this section
   useEffect(() => {
     const onOpen = () => {
       gsap.to(window, {
-        scrollTo: window.innerHeight * 2,
-        duration: 1.4,
+        scrollTo: '#services',
+        duration: 1.2,
         ease: 'power2.inOut',
       })
     }
@@ -82,60 +143,38 @@ export function ServiceSection() {
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      className="service-section"
-      id="services"
-    >
-      <SectionNav active="service" />
-
-      <button
-        className="service-section__close"
-        type="button"
-        aria-label="Close service section"
-        onClick={() => {
-          gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.inOut' })
-        }}
-      >
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
-          <path
-            d="M6 6 L18 18 M18 6 L6 18"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </button>
-
+    <section ref={sectionRef} className="service-section" id="services">
       <div className="service-section__inner">
         <header className="service-section__intro">
-          <span className="service-section__eyebrow">[ Service ]</span>
-          <h2 className="service-section__title">What I Do</h2>
+          <span className="service-section__eyebrow">[ Services ]</span>
+          <h2 className="service-section__title">What I Build</h2>
           <p className="service-section__copy">
-            From concept to launch — building products, and teaching the craft.
+            End-to-end product work for founders and teams — from AI-powered tools
+            to cross-platform apps and full-stack web. One developer, 10+ years,
+            shipping the whole thing.
           </p>
         </header>
 
-        <div className="service-layout">
-          <div className="service-column service-column--left">
-            <ServiceCard s={services[0]} />
-            <ServiceCard s={services[2]} />
-          </div>
+        <div className="service-gallery">
+          {services.map((s) => (
+            <ServiceCard key={s.n} s={s} />
+          ))}
+        </div>
 
-          <div className="service-model">
-            <Canvas
-              camera={{ position: [0, 0, 4.5], fov: 35, near: 0.1, far: 100 }}
-              dpr={[1, 1.5]}
-              gl={{ alpha: true, antialias: true }}
+        <div className="service-cta">
+          <p className="service-cta__lead">Have something to build?</p>
+          <div className="service-cta__actions">
+            <a
+              className="cta-pill cta-pill--primary cta-pill--lg"
+              href={CAL_URL}
+              target="_blank"
+              rel="noreferrer"
             >
-              <NoisySphere followCursor yawRange={1.4} pitchRange={0.9} />
-            </Canvas>
-          </div>
-
-          <div className="service-column service-column--right">
-            <ServiceCard s={services[1]} />
-            <ServiceCard s={services[3]} />
+              Book a call <span aria-hidden>↗</span>
+            </a>
+            <a className="service-cta__secondary" href={`mailto:${EMAIL}`}>
+              Or email me →
+            </a>
           </div>
         </div>
       </div>

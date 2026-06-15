@@ -1,18 +1,13 @@
-import { HeroSection } from './sections/HeroSection'
-import { WorkSection } from './sections/WorkSection'
-import { ServiceSection } from './sections/ServiceSection'
-import { ExperienceSection } from './sections/ExperienceSection'
-import { ContactSection } from './sections/ContactSection'
+import { Routes, Route } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { ProjectPage } from './pages/ProjectPage'
 import './App.css'
 
 export default function App() {
   return (
-    <div className="app">
-      <HeroSection />
-      <WorkSection />
-      <ServiceSection />
-      <ExperienceSection />
-      <ContactSection />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/work/:slug" element={<ProjectPage />} />
+    </Routes>
   )
 }
