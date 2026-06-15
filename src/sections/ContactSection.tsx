@@ -6,10 +6,11 @@ import {
   LinkedInIcon,
   XIcon,
 } from './SocialIcons'
-import { SectionNav } from './SectionNav'
 import './ContactSection.css'
 
 const EMAIL = 'rukkiecodes@gmail.com'
+// TODO: replace with the real booking link once set up
+const CAL_URL = 'https://cal.com/rukkiecodes'
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -18,8 +19,8 @@ export function ContactSection() {
   useEffect(() => {
     const onOpen = () => {
       gsap.to(window, {
-        scrollTo: window.innerHeight * 4,
-        duration: 1.4,
+        scrollTo: '#contact',
+        duration: 1.2,
         ease: 'power2.inOut',
       })
     }
@@ -43,38 +44,25 @@ export function ContactSection() {
       className="contact-section"
       id="contact"
     >
-      <SectionNav active="contact" />
-
-      <button
-        className="contact-section__close"
-        type="button"
-        aria-label="Close contact section"
-        onClick={() => {
-          gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.inOut' })
-        }}
-      >
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
-          <path
-            d="M6 6 L18 18 M18 6 L6 18"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </button>
-
       <div className="contact-section__inner">
         <span className="contact-section__eyebrow">[ Contact ]</span>
-        <h2 className="contact-section__title">Let's Talk</h2>
+        <h2 className="contact-section__title">Let's build something</h2>
         <p className="contact-section__copy">
-          Got a project, idea, or just want to say hi? Drop me a line —
-          I usually reply within a day.
+          Have a product, an idea, or a problem to ship? Book a call and we'll
+          talk through it — or email me directly. I usually reply within a day.
         </p>
 
-        <div className="contact-section__email">
-          <a className="contact-section__mailto" href={`mailto:${EMAIL}`}>
-            {EMAIL} <span aria-hidden>↗</span>
+        <div className="contact-section__actions">
+          <a
+            className="contact-section__book"
+            href={CAL_URL}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Book a call <span aria-hidden>↗</span>
+          </a>
+          <a className="contact-section__email-btn" href={`mailto:${EMAIL}`}>
+            Email me
           </a>
           <button
             type="button"
@@ -82,7 +70,7 @@ export function ContactSection() {
             onClick={copyEmail}
             aria-live="polite"
           >
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? 'Copied' : 'Copy email'}
           </button>
         </div>
 

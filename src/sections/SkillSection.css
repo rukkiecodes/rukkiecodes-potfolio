@@ -1,0 +1,139 @@
+.skill-section {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  color: #f5f3ff;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #07070F;
+}
+
+.skill-section__inner {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 10vh 5vw 6vh;
+  gap: 3vh;
+}
+
+/* intro — identical pattern to .service-section__intro */
+.skill-section__intro {
+  flex-shrink: 0;
+  max-width: 38rem;
+}
+.skill-section__eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 255, 0.5);
+  margin-bottom: 0.55rem;
+}
+.skill-section__title {
+  margin: 0 0 0.55rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.skill-section__copy {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(245, 243, 255, 0.65);
+}
+
+/* grid — auto-fit, slightly wider min than services so chip clusters breathe */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.25rem;
+  margin-top: 1vh;
+  align-items: start;
+}
+
+/* glassy card — same border/fill/lift system as service & project cards */
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.4rem 1.4rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(245, 243, 255, 0.08);
+  background: rgba(245, 243, 255, 0.03);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.skill-card:hover {
+  border-color: rgba(245, 243, 255, 0.2);
+  background: rgba(245, 243, 255, 0.06);
+  transform: translateY(-4px);
+}
+/* featured (Mobile + AI) — subtle green accent, reuses #2bd57a status color */
+.skill-card--featured { border-color: rgba(43, 213, 122, 0.28); }
+.skill-card--featured:hover { border-color: rgba(43, 213, 122, 0.5); }
+
+.skill-card__head { display: flex; align-items: center; gap: 0.6rem; }
+.skill-card__num {
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(245, 243, 255, 0.5);
+}
+.skill-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f5f3ff;
+  line-height: 1.2;
+}
+/* green dot before featured group titles, matching the hero status-dot */
+.skill-card--featured .skill-card__head::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #2bd57a;
+  box-shadow: 0 0 0 4px rgba(43, 213, 122, 0.18);
+  flex-shrink: 0;
+  order: -1;
+}
+
+/* chip cluster — static tags, wrap freely */
+.skill-card__chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 243, 255, 0.1);
+  background: rgba(245, 243, 255, 0.04);
+  font-size: 0.8rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: rgba(245, 243, 255, 0.82);
+  white-space: nowrap;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+/* on card hover, chips brighten slightly (pure CSS, no per-chip JS) */
+.skill-card:hover .skill-chip {
+  border-color: rgba(245, 243, 255, 0.18);
+  color: #f5f3ff;
+}
+
+/* responsive — single column on phones */
+@media (max-width: 600px) {
+  .skill-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+  .skill-chip { font-size: 0.76rem; padding: 0.34rem 0.6rem; }
+}

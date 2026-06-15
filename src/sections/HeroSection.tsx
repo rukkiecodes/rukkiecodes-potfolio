@@ -7,6 +7,9 @@ import './HeroSection.css'
 
 gsap.registerPlugin(ScrollToPlugin)
 
+// TODO: replace with the real booking link once set up
+const CAL_URL = 'https://cal.com/rukkiecodes'
+
 export function HeroSection() {
   const grayRef = useRef<HTMLImageElement>(null)
 
@@ -27,8 +30,8 @@ export function HeroSection() {
   const scrollToWork = (e: React.MouseEvent) => {
     e.preventDefault()
     gsap.to(window, {
-      scrollTo: window.innerHeight,
-      duration: 1.4,
+      scrollTo: '#work',
+      duration: 1.2,
       ease: 'power2.inOut',
     })
   }
@@ -57,18 +60,18 @@ export function HeroSection() {
       <nav className="hero__nav">
         <div className="status-pill">
           <span className="status-dot" />
-          Available for New Project
+          Available for freelance &amp; contract
         </div>
 
         <ul className="hero__navlinks">
-          <li><a href="#work" onClick={scrollToWork}>Work <sup>[14]</sup></a></li>
-          <li><a href="#services" onClick={openService}>Service <sup>[4]</sup></a></li>
-          <li><a href="#experience" onClick={openExperience}>Experience <sup>[5y+]</sup></a></li>
+          <li><a href="#work" onClick={scrollToWork}>Work <sup>[6]</sup></a></li>
+          <li><a href="#services" onClick={openService}>Service <sup>[5]</sup></a></li>
+          <li><a href="#experience" onClick={openExperience}>Experience <sup>[10y+]</sup></a></li>
           <li><a href="#contact" onClick={openContact}>Contact</a></li>
         </ul>
 
-        <a className="cta-pill cta-pill--primary" href="#contact" onClick={openContact}>
-          Let's Talk <span aria-hidden>↗</span>
+        <a className="cta-pill cta-pill--primary" href={CAL_URL} target="_blank" rel="noreferrer">
+          Book a call <span aria-hidden>↗</span>
         </a>
       </nav>
 
@@ -90,16 +93,21 @@ export function HeroSection() {
       </div>
 
       <div className="hero__intro">
-        <h2>Creative Developer</h2>
+        <h2>Senior software developer, 10+ years</h2>
         <p>
-          Software developer with 10+ years building scalable web and mobile
-          applications. I work with modern frameworks and AI-driven tooling to
-          ship high-performing, user-focused products — clean design, reliable
-          delivery, on time.
+          I build AI-powered products, cross-platform mobile apps (React Native /
+          Expo), and full-stack web on React, Next.js, Node and Firebase — plus
+          browser extensions and dev tools. Senior-level delivery: clean design,
+          dependable shipping, on schedule.
         </p>
-        <a className="cta-pill cta-pill--primary cta-pill--lg" href="#contact" onClick={openContact}>
-          Let's collaborate <span aria-hidden>↗</span>
-        </a>
+        <div className="hero__intro-actions">
+          <a className="cta-pill cta-pill--primary cta-pill--lg" href={CAL_URL} target="_blank" rel="noreferrer">
+            Book a call <span aria-hidden>↗</span>
+          </a>
+          <a className="cta-pill cta-pill--ghost cta-pill--lg" href="#work" onClick={scrollToWork}>
+            View work
+          </a>
+        </div>
       </div>
 
       <ul className="hero__socials">

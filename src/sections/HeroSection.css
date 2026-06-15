@@ -112,6 +112,28 @@
   font-size: 0.95rem;
 }
 
+/* secondary / ghost pill — used in hero intro + reused across sections */
+.cta-pill--ghost {
+  background: rgba(255, 255, 255, 0.03);
+  color: #f5f3ff;
+  border-color: rgba(245, 243, 255, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.cta-pill--ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 243, 255, 0.3);
+  color: #fff;
+}
+
+.hero__intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
 /* ===== big name ===== */
 /* 3D banner — full-bleed canvas, three.js handles internal layout */
 .hero__banner-3d {
@@ -280,4 +302,5 @@
     font-size: 0.75rem;
     gap: 0.35rem;
   }
+  .hero__intro h2 { font-size: 1.2rem; }
 }

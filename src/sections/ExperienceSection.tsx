@@ -1,70 +1,65 @@
 import gsap from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 import { useEffect, useRef } from 'react'
-import { SectionNav } from './SectionNav'
 import './ExperienceSection.css'
+
+gsap.registerPlugin(ScrollToPlugin)
+
+// TODO: replace with the real booking link once set up
+const CAL_URL = 'https://cal.com/rukkiecodes'
 
 interface Experience {
   role: string
   company: string
   period: string
   bullets: string[]
+  tags: string[]
 }
 
 const experiences: Experience[] = [
   {
     role: 'Head of R&D / Instructor',
     company: 'Wanlainjo Groups',
-    period: '2023 – Present',
+    period: '2023 — Present',
     bullets: [
+      'Integrated AI agents and LLM-powered tooling into delivery workflows, cutting turnaround on R&D projects.',
       'Promoted to Head of Research & Development — lead teams building internal tools and client-facing digital platforms.',
-      'Integrated AI agents and LLM-powered tooling into team workflows, cutting delivery time on R&D projects.',
       'Designed and delivered programming curricula across web, mobile, and backend for diverse learner groups.',
     ],
+    tags: ['AI Agents', 'LLM Tooling', 'R&D'],
   },
   {
     role: 'Co-Founder & Lead Developer',
     company: 'Freelance Developer Collective',
-    period: '2021 – Present',
+    period: '2021 — Present',
     bullets: [
       'Co-founded a collective that has shipped 100+ digital solutions for private and government clients.',
-      'Owned full-stack delivery end-to-end — architecture, frontend, backend, mobile, deployment, and client relations.',
       'Built production systems spanning real-time apps (Socket.IO), REST/GraphQL APIs, and cross-platform mobile.',
+      'Owned delivery end-to-end — architecture, frontend, backend, mobile, deployment, and client relations.',
     ],
+    tags: ['React Native', 'Node', 'Socket.IO', 'GraphQL'],
   },
   {
     role: 'Front-End Developer',
     company: 'Babbage',
-    period: '2020 – 2021',
+    period: '2020 — 2021',
     bullets: [
-      'Led UI revamps across multiple web products using Vue.js, enforcing component reusability and design consistency.',
-      'Collaborated with designers and PMs in Agile sprints to deliver polished, production-ready features on schedule.',
+      'Led UI revamps across multiple web products with Vue.js, enforcing component reusability and design consistency.',
+      'Worked with designers and PMs in Agile sprints to ship polished, production-ready features on schedule.',
     ],
+    tags: ['Vue.js', 'Agile'],
   },
   {
     role: 'Front-End Developer',
     company: 'Primed Soft',
-    period: '2018 – 2019',
+    period: '2018 — 2019',
     bullets: [
       'Built modular Vue.js + Vuetify applications integrated with REST APIs for end-to-end feature delivery.',
       'Improved performance and responsive design across device types, reducing layout issues reported by QA.',
     ],
+    tags: ['Vue.js', 'Vuetify', 'REST APIs'],
   },
 ]
-
-function ExperienceCard({ exp }: { exp: Experience }) {
-  return (
-    <article className="experience-card">
-      <span className="experience-card__period">{exp.period}</span>
-      <h3 className="experience-card__role">{exp.role}</h3>
-      <span className="experience-card__company">{exp.company}</span>
-      <ul className="experience-card__bullets">
-        {exp.bullets.map((b, i) => (
-          <li key={i}>{b}</li>
-        ))}
-      </ul>
-    </article>
-  )
-}
 
 export function ExperienceSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -72,8 +67,8 @@ export function ExperienceSection() {
   useEffect(() => {
     const onOpen = () => {
       gsap.to(window, {
-        scrollTo: window.innerHeight * 3,
-        duration: 1.4,
+        scrollTo: '#experience',
+        duration: 1.2,
         ease: 'power2.inOut',
       })
     }
@@ -81,57 +76,69 @@ export function ExperienceSection() {
     return () => window.removeEventListener('open-experience', onOpen)
   }, [])
 
+  const scrollToWork = (e: React.MouseEvent) => {
+    e.preventDefault()
+    gsap.to(window, { scrollTo: '#work', duration: 1.2, ease: 'power2.inOut' })
+  }
+
   return (
-    <section
-      ref={sectionRef}
-      className="experience-section"
-      id="experience"
-    >
-      <SectionNav active="experience" />
-
-      <button
-        className="experience-section__close"
-        type="button"
-        aria-label="Close experience section"
-        onClick={() => {
-          gsap.to(window, { scrollTo: 0, duration: 1, ease: 'power2.inOut' })
-        }}
-      >
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden>
-          <path
-            d="M6 6 L18 18 M18 6 L6 18"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            fill="none"
-          />
-        </svg>
-      </button>
-
+    <section ref={sectionRef} className="experience-section" id="experience">
       <div className="experience-section__inner">
         <header className="experience-section__intro">
           <span className="experience-section__eyebrow">[ Experience ]</span>
           <h2 className="experience-section__title">Where I've Worked</h2>
           <p className="experience-section__copy">
-            5+ years across product teams, R&amp;D, and front-end leadership.
+            10+ years across product teams, R&amp;D, and full-stack delivery —
+            shipping AI-powered products, cross-platform mobile, and full-stack web
+            for private and government clients.
           </p>
         </header>
 
-        <div className="experience-grid">
-          <div className="experience-column">
-            <ExperienceCard exp={experiences[0]} />
-            <ExperienceCard exp={experiences[2]} />
-          </div>
+        <ol className="experience-timeline" role="list">
+          {experiences.map((exp) => (
+            <li key={exp.company} className="experience-item">
+              <span className="experience-item__node" aria-hidden="true" />
+              <article className="experience-card">
+                <div className="experience-card__head">
+                  <div className="experience-card__heading">
+                    <h3 className="experience-card__role">{exp.role}</h3>
+                    <span className="experience-card__company">{exp.company}</span>
+                  </div>
+                  <span className="experience-card__period">{exp.period}</span>
+                </div>
+                <ul className="experience-card__bullets" role="list">
+                  {exp.bullets.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+                <ul className="experience-card__tags" role="list">
+                  {exp.tags.map((t) => (
+                    <li key={t} className="experience-tag">{t}</li>
+                  ))}
+                </ul>
+              </article>
+            </li>
+          ))}
+        </ol>
 
-          <div className="experience-portrait">
-            <img src="/portrait.png" alt="Terry Amagboro" />
+        <footer className="experience-section__footer">
+          <p className="experience-section__footer-copy">
+            Want this kind of delivery on your product?
+          </p>
+          <div className="experience-section__actions">
+            <a
+              className="cta-pill cta-pill--primary cta-pill--lg"
+              href={CAL_URL}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a call
+            </a>
+            <a className="cta-pill cta-pill--ghost cta-pill--lg" href="#work" onClick={scrollToWork}>
+              View work
+            </a>
           </div>
-
-          <div className="experience-column">
-            <ExperienceCard exp={experiences[1]} />
-            <ExperienceCard exp={experiences[3]} />
-          </div>
-        </div>
+        </footer>
       </div>
     </section>
   )
