@@ -174,7 +174,7 @@ export const projects: Project[] = [
   },
   {
     slug:    'docgrab',
-    status:  'coming-soon',
+    status:  'live',
     eyebrow: '06 — Browser Extension',
     title:   'DocGrab',
     tagline: 'Save any documentation as clean Markdown or JSON you own.',
@@ -191,7 +191,9 @@ export const projects: Project[] = [
     galleryLayout: 'wide',
     tech:     ['Chrome extension', 'Markdown', 'JSON', 'CLI tools'],
     imageAlt: 'DocGrab extension screen',
-    links: [],
+    links: [
+      { label: 'Get DocGrab', url: 'https://chromewebstore.google.com/detail/iidihnjiickpcgmggnpejkbamkifdofc?utm_source=item-share-cb' },
+    ],
   },
 ]
 
